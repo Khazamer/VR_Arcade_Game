@@ -27,11 +27,13 @@ public class PlayerShoot : MonoBehaviour
         if (trigger.action.ReadValue<float>() > 0.5 && gameObject.transform.childCount > 0) {
             gunTransform = gameObject.transform.GetChild(0);
 
-            Debug.Log(currTimer);
+            //Debug.Log(currTimer);
+            Debug.Log(gunTransform.gameObject.name);
 
             if (gunTransform.tag == "Pistol") {
                 Debug.Log("Pistol");
                 if (pistolTimer - currTimer <= 0 && resetTrigger) {
+                    Debug.Log("Pistol shot");
                     GameObject newPistolBullet = Instantiate(pistolBulletTemplate, transform.position + (transform.forward * 1f), transform.rotation);
                     newPistolBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
 
@@ -44,6 +46,7 @@ public class PlayerShoot : MonoBehaviour
             else if (gunTransform.tag == "SMG") {
                 Debug.Log("SMG");
                 if (SMGTimer - currTimer <= 0) {
+                    Debug.Log("SMG shot");
                     GameObject newSMGBullet = Instantiate(SMGBulletTemplate, transform.position + (transform.forward * 1f), transform.rotation);
                     newSMGBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
 

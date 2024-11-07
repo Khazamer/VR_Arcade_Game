@@ -9,6 +9,7 @@ TagManager:
   - Shotgun
   - Pistol
   - SMG
+  - Hand
   layers:
   - Default
   - TransparentFX
