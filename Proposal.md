@@ -19,17 +19,19 @@ This project is inspired by Terminator Salvation with the goal of making an exci
 
 ## Milestones
 
-List here the progress you intend to make by each milestone check point. The dates I have represented here are actual due dates for project submissions. These will also be in class time to get feedback from me and other students, so you must have something ready to test by class on each of these days.
-
 1. **By 11/15** - Have at least 1 weapon fully implemented (shooting, bullets, shells, sound, particles), 1 enemy fully implemented (moving, health, spawning, global tracker of how many are left), and player movement implemented
-2. **By 11/22** - Create a basic system that tracks if the user is ready to move onto the next level and start exploring the city where the gameplay will be. Also, decide if more weapons/enemies are needed and implement them as such.
+2. **By 11/19** - Build a demo level within the city to see if everything flows correctly of if I need to change some things. Potentially add more weapons as well and enemies for the demo to see how testers react.
 3. **By the end of Thanksgiving Break** - Have a general idea of game layout and flow so that it can be implemented after break
-4. **By 12/6** - Have basic layout setup and simple gameplay done (1 enemy, 1 gun) and make sure the flow works
+4. **By 12/5** - Have basic layout setup and simple gameplay done and make sure the flow works
 5. **By 12/13** - Have game basically done in terms of flow, gameplay and balance
 6. **By showcase* - Finalize game balance and flow
 
 ## Inspirations
 
 The main inspirations for this game were:
-**Terminator Salvation:** I want my game to flow very similar to that game where the player gets new weapons and faces enemies while being moved around the game automatically instead of having to move themselves.
-**Pistol Whip:** Another shoot-em-up vr game that has some element I really liked (such as limited ammo). Its also a nice reference point for things that I can add incase I finish the game early or need to switch directions.
+**Terminator Salvation:**
+    - *Link:* https://rawthrills.com/games/terminator-salvation/
+    - I want my game to flow very similar to that game where the player gets new weapons and faces enemies while being moved around the game automatically instead of having to move themselves.
+**Pistol Whip::**
+    - *Link:* https://www.meta.com/experiences/pistol-whip/2104963472963790/
+    - Another shoot-em-up vr game that has some element I really liked (such as limited ammo). Its also a nice reference point for things that I can add incase I finish the game early or need to switch directions.
