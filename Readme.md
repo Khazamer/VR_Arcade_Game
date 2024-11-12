@@ -12,3 +12,10 @@ VR Arcade Project
 
 # Inspiration
 - Terminator Salvation
+
+# Credits
+Models:
+
+Sounds:
+Pistol/smg shot: https://pixabay.com/sound-effects/submachine-gun-79846/
+Shotgun shot: https://pixabay.com/users/dennish18-26151496/
