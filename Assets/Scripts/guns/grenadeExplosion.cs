@@ -9,8 +9,12 @@ public class grenadeExplosion : MonoBehaviour
     [SerializeField] float power = 10f;
     [SerializeField] int damage = 4;
     public ParticleSystem explosion;
+    public AudioClip exploded;
     void OnCollisionEnter(Collision collider) {
-        Debug.Log("Kaboom");
+        //Debug.Log("Kaboom");
+
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius, layers);
 
@@ -23,7 +27,8 @@ public class grenadeExplosion : MonoBehaviour
             }
         }
         explosion.Play();
+        GetComponent<AudioSource>().PlayOneShot(exploded);
 
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 }
