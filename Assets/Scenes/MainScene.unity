@@ -5226,7 +5226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238358760}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
   m_Name: 
@@ -5238,7 +5238,7 @@ MonoBehaviour:
   m_Duration: 5
   m_MaxSpeed: 8.243186
   m_EasingMode: 0
-  m_AlignmentMode: 1
+  m_AlignmentMode: 0
   m_ObjectForwardAxis: 2
   m_ObjectUpAxis: 1
   m_StartOffset: 0
@@ -10949,10 +10949,10 @@ MonoBehaviour:
         z: 1.076381
       Rotation:
         value:
-          x: 5.6551176e-21
-          y: -0.050498422
-          z: -1.1184314e-19
-          w: 0.99872416
+          x: 0
+          y: 0
+          z: 0
+          w: 1
     - Position:
         x: -1.0857239
         y: 0
@@ -10967,9 +10967,9 @@ MonoBehaviour:
         z: 2.9803498
       Rotation:
         value:
-          x: 3.1687348e-19
+          x: 4.174712e-34
           y: -0.38580406
-          z: -7.577457e-19
+          z: -9.983071e-34
           w: 0.9225808
     - Position:
         x: -12.943182
@@ -10985,9 +10985,9 @@ MonoBehaviour:
         z: 4.274905
       Rotation:
         value:
-          x: 8.4917223e-10
+          x: 0.000000006375397
           y: 0.91378105
-          z: 0.000000016798335
+          z: 0.0000000143417385
           w: -0.40620714
     - Position:
         x: -13.275158
@@ -11003,9 +11003,9 @@ MonoBehaviour:
         z: 3.2448742
       Rotation:
         value:
-          x: -0.0000000011557068
+          x: -0.000000006299462
           y: 0.9177783
-          z: 0.00000001678511
+          z: 0.000000014559571
           w: 0.3970934
     - Position:
         x: -0.64398766
@@ -11014,17 +11014,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -1.2669175
+        z: -2.9726918
       TangentOut:
         x: 0
         y: 0
-        z: 1.2669175
+        z: 2.58728
       Rotation:
         value:
-          x: 7.517916e-19
-          y: 0.6791912
-          z: 8.124163e-19
-          w: 0.73396134
+          x: 0.0000000303781
+          y: 0.38029793
+          z: -0.000000012491273
+          w: 0.924864
     m_MetaData:
     - Mode: 4
       Tension: 0.5
@@ -12011,19 +12011,19 @@ MonoBehaviour:
         y: 0
         z: 0
       TangentIn:
-        x: -0
-        y: -0
-        z: -1.1358255
+        x: 0
+        y: 0
+        z: -3.47132
       TangentOut:
         x: 0
         y: 0
-        z: 1.1358255
+        z: 3.6764226
       Rotation:
         value:
-          x: 2.0918372e-21
-          y: -0.030700551
-          z: -6.8104675e-20
-          w: 0.99952865
+          x: 0
+          y: -0.042478185
+          z: -0
+          w: 0.9990974
     - Position:
         x: -0.6970806
         y: 0
@@ -12038,9 +12038,9 @@ MonoBehaviour:
         z: 2.4969225
       Rotation:
         value:
-          x: 3.2187368e-19
+          x: 0
           y: 0.3937148
-          z: 7.515003e-19
+          z: 0
           w: 0.9192326
     - Position:
         x: 10.951528
@@ -12056,9 +12056,9 @@ MonoBehaviour:
         z: 4.3583326
       Rotation:
         value:
-          x: 5.119515e-19
+          x: 0
           y: 0.930367
-          z: 2.0174472e-19
+          z: 0
           w: 0.3666297
     - Position:
         x: 11.746078
@@ -12074,9 +12074,9 @@ MonoBehaviour:
         z: 2.8796072
       Rotation:
         value:
-          x: -4.3431444e-19
+          x: 0
           y: 0.93016046
-          z: 1.7143273e-19
+          z: 0
           w: -0.36715323
     - Position:
         x: 1.0970821
@@ -12085,19 +12085,19 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -1.0652872
+        z: -2.5781095
       TangentOut:
         x: 0
         y: 0
-        z: 1.0652872
+        z: 2.5135818
       Rotation:
         value:
-          x: -7.952752e-19
-          y: 0.7165807
-          z: 7.7410374e-19
-          w: -0.6975042
+          x: 6.288332e-34
+          y: -0.41376165
+          z: -1.3835996e-33
+          w: 0.9103852
     m_MetaData:
-    - Mode: 4
+    - Mode: 3
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
@@ -12793,8 +12793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37c8c72195ad6d40b5a80260bbd2096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetButton: {fileID: 0}
-  msgString: 
+  msgString: Cleared
 --- !u!1 &1125030884
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,11 +7,13 @@ using UnityEngine.InputSystem;
 
 public class debugText : MonoBehaviour
 {
+    /*
     public InputActionReference resetButton; 
 
     void Start(){
         resetButton.action.performed += ResetLog; 
     }
+    */
 
     public void ResetLog(InputAction.CallbackContext obj)
     {
