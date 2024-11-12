@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2851249318287615113}
   - component: {fileID: 6503869455429239635}
   - component: {fileID: 7989681889889837624}
+  - component: {fileID: 4145431972281289884}
   m_Layer: 0
   m_Name: PistolBullet
   m_TagString: Untagged
@@ -56,7 +57,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -84,6 +85,19 @@ CapsuleCollider:
   m_Height: 0.03
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4145431972281289884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434783726027199410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f7b70dfe9e9b346b112a6d7b5278a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &8306292267496016479
 GameObject:
   m_ObjectHideFlags: 0

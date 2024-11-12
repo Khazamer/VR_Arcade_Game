@@ -28,7 +28,7 @@ public class smgShoot : MonoBehaviour
                     newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
                     Destroy(newBullet, 2);
 
-                    GameObject newShell = Instantiate(BulletTemplate, transform.position + (transform.forward * -0.05f) + (transform.right * 0.04f) + (transform.up * 0.1f), transform.rotation);
+                    GameObject newShell = Instantiate(ShellTemplate, transform.position + (transform.forward * -0.05f) + (transform.right * 0.04f) + (transform.up * 0.1f), transform.rotation);
                     newShell.GetComponent<Rigidbody>().AddForce(transform.right * (shootPower / 10f));
                     newShell.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1 * (shootPower / 10f), 0));
                     Destroy(newShell, 1);
