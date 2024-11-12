@@ -21,7 +21,7 @@ public class pistolShoot : MonoBehaviour
     void Update() {
         currTimer += Time.deltaTime;
 
-        if (gameObject.transform.parent != null && gameObject.transform.parent.tag == "Hand") {
+        if (gameObject.transform.parent != null) {
             if (!alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() > 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() > 0.5))) {
                 if (Timer - currTimer <= 0) {
                     alreadyPushed = true;

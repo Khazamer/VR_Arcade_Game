@@ -25,7 +25,7 @@ public class grenadeLauncher : MonoBehaviour
                 if (Timer - currTimer <= 0) {
                     alreadyPushed = true;
 
-                    GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.4f) + (transform.up * 0.05f), transform.rotation);
+                    GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.5f) + (transform.up * 0.03f), transform.rotation);
                     newBullet.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
                     newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
                     //Destroy(newBullet, 2);

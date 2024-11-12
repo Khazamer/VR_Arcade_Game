@@ -6,7 +6,9 @@ public class bulletDamage : MonoBehaviour
 {
     [SerializeField] int damage = 1;
     void OnCollisionEnter(Collision collision) {
-        collision.gameObject.GetComponent<enemyHealth>().addDamage(damage);
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Enemy") {
+            collision.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }
