@@ -25,6 +25,7 @@ public class smgShoot : MonoBehaviour
                 if (Timer - currTimer <= 0) {
                     //Debug.Log("SMG shot");
                     GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.2f) + (transform.up * 0.1f), transform.rotation);
+                    Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
                     newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
                     Destroy(newBullet, 2);
 

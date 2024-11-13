@@ -27,6 +27,7 @@ public class grenadeLauncher : MonoBehaviour
 
                     GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.5f) + (transform.up * 0.03f), transform.rotation);
                     newBullet.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
+                    Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
                     newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
                     //Destroy(newBullet, 2);
 

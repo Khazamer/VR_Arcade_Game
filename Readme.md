@@ -4,6 +4,16 @@ VR Arcade Project
 # Idea: Terminator Salvation Game
 
 # Notes
+Add game start menu select
+based on whats pressed, send "easy, medium or hard" to the global script to init variables
+then init based on those so that when adding weapons and stuff it known what is happening
+can also add stuff that sends update requests if upgrades are done
+
+FIND SOME WAY TO DEAL WITH RIGID BODY STUFF
+RN ONLY THE BULLET HAS RIGID BODY AND THE ENEMIES DONT
+MAY MAKE THEM HAVE 2 COLLIDER: 1 FOR THE BULLETS AND ONE FOR EACH OTHER
+OTHERWISE HAVE TO DEAL WITH RIGID BODY FORCE TRANSFER SHENANIGANS
+COULD JUST MAKE THE BULLET HAVE INSANELY LOW MASS AND SHOOTING POWER BUT THAT IS A PROBLEM FOR WHEN ENEMIES HAVE BEEN FIGURED OUT
 
 # Todo
 - Gunplay

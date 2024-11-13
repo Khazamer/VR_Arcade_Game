@@ -34,6 +34,8 @@ public class shotgunShoot : MonoBehaviour
                         currChild = newBullet.transform.GetChild(i);
                         childBody = currChild.GetComponent<Rigidbody>();
                         localPos = currChild.localPosition;
+
+                        Physics.IgnoreCollision(currChild.GetComponent<Collider>(), GetComponent<Collider>());
                         //newBullet.transform.GetChild(i).GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
                         childBody.AddForce(transform.forward * shootPower);
                         //might be able to take out the check
