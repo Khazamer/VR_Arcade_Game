@@ -9,7 +9,12 @@ public class enemyHealth : MonoBehaviour
         health -= damage;
 
         if (health <= 0) {
-            Destroy(gameObject);
+            if (gameObject.GetComponent<enemyWarrior>()) {
+                gameObject.GetComponent<enemyWarrior>().died();
+            }
+            else if (gameObject.GetComponent<enemyDrone>()) {
+                gameObject.GetComponent<enemyDrone>().died();
+            }
         }
     }
 }

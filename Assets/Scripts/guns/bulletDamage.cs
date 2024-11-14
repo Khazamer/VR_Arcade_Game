@@ -8,7 +8,7 @@ public class bulletDamage : MonoBehaviour
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Enemy") {
             collision.gameObject.GetComponent<enemyHealth>().addDamage(damage);
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
