@@ -15,8 +15,9 @@ public class enemyWarrior : MonoBehaviour
     private bool isDead = false;
 
     //private bool framePassed = false;
-    private int count = 0;
+    //private int count = 0;
     private int damageCount = 0;
+    private int damageTimer = 0;
     private float attackDistance = 1f;
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class enemyWarrior : MonoBehaviour
     void Update()
     {
         //Debug.Log(gameObject.transform.position);
-        Debug.Log(damageCount);
+        //Debug.Log(damageCount);
 
         if (Vector3.Distance(gameObject.transform.position, playerTarget.transform.position) < attackDistance) {
             movingForward = false;
@@ -51,11 +52,16 @@ public class enemyWarrior : MonoBehaviour
                 playerTarget.GetComponent<playerHealth>().addDamage(1);
             }
             */
-            //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            if (damageCount < Mathf.FloorToInt(animator.GetCurrentAnimatorStateInfo(0).normalizedTime)) {
-                count ++;
-                playerTarget.GetComponent<playerHealth>().addDamage(1);
-                damageCount ++;
+            damageTimer ++;
+
+            if (damageTimer > 100) {
+                //Debug.Log(Mathf.RoundToInt(animator.GetCurrentAnimatorStateInfo(0).normalizedTime));
+                Debug.Log(damageCount);
+                if (damageCount < Mathf.RoundToInt(animator.GetCurrentAnimatorStateInfo(0).normalizedTime)) {
+                    //count ++;
+                    playerTarget.GetComponent<playerHealth>().addDamage(1);
+                    damageCount ++;
+                }
             }
         }
     }
