@@ -38,7 +38,9 @@ public class enemyWarrior : MonoBehaviour
         }
 
         if (movingForward) {
-            transform.LookAt(playerTarget.transform.position);
+            Vector3 lookNoY = new Vector3(playerTarget.transform.position[0], 0, playerTarget.transform.position[2]);
+            //transform.LookAt(playerTarget.transform.position);
+            transform.LookAt(lookNoY);
             transform.position += transform.forward * speed; 
         }
 
