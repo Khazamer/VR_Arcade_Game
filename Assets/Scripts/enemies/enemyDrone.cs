@@ -44,7 +44,7 @@ public class enemyDrone : MonoBehaviour
             animator.SetBool("Moving Forward", movingForward);
         }
 
-        if (movingForward) {
+        if (movingForward && !isDead) {
             transform.LookAt(playerTarget.transform.position);
             transform.position += transform.forward * speed; 
         }
@@ -83,6 +83,7 @@ public class enemyDrone : MonoBehaviour
             damageTimer ++;
 
             if(damageTimer == 100) {
+                transform.LookAt(playerTarget.transform.position);
                 laserLine.SetPosition(0, gameObject.transform.position + (gameObject.transform.forward * 0.5f));
                 Vector3 rayOrigin = gameObject.transform.position;
                 RaycastHit hit;
@@ -95,7 +96,9 @@ public class enemyDrone : MonoBehaviour
                     laserLine.SetPosition(1, rayOrigin + (gameObject.transform.forward * gunRange));
                 }
 
-                laserLine.material.color = Color.blue;
+                //laserLine.material.color = Color.blue;
+                laserLine.startColor = Color.blue;
+                laserLine.endColor = Color.blue;
                 laserLine.startWidth = 0.025f;
                 laserLine.endWidth = 0.025f;
                 laserLine.enabled = true;
@@ -103,7 +106,9 @@ public class enemyDrone : MonoBehaviour
             else if (damageTimer == 200) {
                 laserLine.startWidth = 0.1f;
                 laserLine.endWidth = 0.1f;
-                laserLine.material.color = Color.red;
+                //laserLine.material.color = Color.red;
+                laserLine.startColor = Color.red;
+                laserLine.endColor = Color.red;
             }
             else if (damageTimer == 250) {
                 damageTimer = 0;
@@ -119,6 +124,7 @@ public class enemyDrone : MonoBehaviour
 
         gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         Destroy(gameObject, 3);
     }
 

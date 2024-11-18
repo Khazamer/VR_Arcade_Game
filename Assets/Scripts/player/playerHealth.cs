@@ -9,7 +9,7 @@ public class playerHealth : MonoBehaviour
         health -= damage;
 
         if (health <= 0) {
-            //Debug.Log("Game Over");
+            Debug.Log("Game Over");
         }
     }
 }

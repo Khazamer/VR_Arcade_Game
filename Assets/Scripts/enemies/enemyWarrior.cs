@@ -36,12 +36,16 @@ public class enemyWarrior : MonoBehaviour
             animator.SetBool("Moving Forward", movingForward);
             //animator.Play(PA_WarriorAttack_Clip, 0);
         }
+        else {
+            movingForward = true;
+            animator.SetBool("Moving Forward", movingForward);
+        }
 
-        if (movingForward) {
+        if (movingForward && !isDead) {
             Vector3 lookNoY = new Vector3(playerTarget.transform.position[0], 0, playerTarget.transform.position[2]);
             //transform.LookAt(playerTarget.transform.position);
             transform.LookAt(lookNoY);
-            transform.position += transform.forward * speed; 
+            transform.position += transform.forward * speed;
         }
 
         if (!movingForward && !isDead) {
@@ -74,6 +78,7 @@ public class enemyWarrior : MonoBehaviour
 
         gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         Destroy(gameObject, 3);
     }
 

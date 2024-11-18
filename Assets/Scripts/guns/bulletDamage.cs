@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class bulletDamage : MonoBehaviour
 {
-    [SerializeField] int damage = 1;
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Enemy") {
-            collision.gameObject.GetComponent<enemyHealth>().addDamage(damage);
+    [SerializeField] int damage = 1; //change to is trigger and use that instead
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Enemy") {
+            collider.gameObject.GetComponent<enemyHealth>().addDamage(damage);
         }
         Destroy(gameObject);
     }

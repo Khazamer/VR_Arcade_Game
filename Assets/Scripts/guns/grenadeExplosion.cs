@@ -10,7 +10,7 @@ public class grenadeExplosion : MonoBehaviour
     [SerializeField] int damage = 4;
     public ParticleSystem explosion;
     public AudioClip exploded;
-    void OnCollisionEnter(Collision collider) {
+    void OnCollisionEnter() {
         //Debug.Log("Kaboom");
 
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
