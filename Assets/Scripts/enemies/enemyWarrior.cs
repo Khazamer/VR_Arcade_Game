@@ -79,7 +79,7 @@ public class enemyWarrior : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 0.5f);
     }
 
     // need to check if moving forward (transistioning forward)

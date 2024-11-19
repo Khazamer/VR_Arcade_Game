@@ -23,6 +23,7 @@ public class enemyDrone : MonoBehaviour
     //new stuff
     public float gunRange = 50f;
     public float laserDuration = 0.05f;
+    private Vector3 target;
  
     LineRenderer laserLine;
     // Start is called before the first frame update
@@ -39,13 +40,21 @@ public class enemyDrone : MonoBehaviour
         //Debug.Log(gameObject.transform.position);
         //Debug.Log(damageCount);
 
-        if (Vector3.Distance(gameObject.transform.position, playerTarget.transform.position) < attackDistance) {
+        // make it not shoot in your eyes
+        target = playerTarget.transform.position;
+        target[1] = Math.Max(target[1] - 0.5f, 0.2f);
+
+        if (Vector3.Distance(gameObject.transform.position, target) < attackDistance) {
             movingForward = false;
+            animator.SetBool("Moving Forward", movingForward);
+        }
+        else if (damageTimer == 0) { // may change to make grenade explosions cuase them to flip
+            movingForward = true;
             animator.SetBool("Moving Forward", movingForward);
         }
 
         if (movingForward && !isDead) {
-            transform.LookAt(playerTarget.transform.position);
+            transform.LookAt(target);
             transform.position += transform.forward * speed; 
         }
 
@@ -83,7 +92,7 @@ public class enemyDrone : MonoBehaviour
             damageTimer ++;
 
             if(damageTimer == 100) {
-                transform.LookAt(playerTarget.transform.position);
+                transform.LookAt(target);
                 laserLine.SetPosition(0, gameObject.transform.position + (gameObject.transform.forward * 0.5f));
                 Vector3 rayOrigin = gameObject.transform.position;
                 RaycastHit hit;
@@ -122,10 +131,12 @@ public class enemyDrone : MonoBehaviour
         isDead = true;
         animator.SetBool("Dead", isDead);
 
-        gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
-        gameObject.GetComponent<Rigidbody>().isKinematic = false;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        Destroy(gameObject, 3);
+        //gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
+        //gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        //gameObject.GetComponent<Rigidbody>().AddForce(0, -1, 0);
+        Destroy(gameObject, 1.5f); // maybe have an explosion but not an issue for now
     }
 
     // need to check if moving forward (transistioning forward)
