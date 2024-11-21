@@ -11,6 +11,8 @@ TagManager:
   - SMG
   - Hand
   - Enemy
+  - demo_level
+  - endless
   layers:
   - Default
   - TransparentFX

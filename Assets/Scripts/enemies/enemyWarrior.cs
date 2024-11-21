@@ -80,6 +80,8 @@ public class enemyWarrior : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         Destroy(gameObject, 0.5f);
+
+        globals.numKills ++;
     }
 
     // need to check if moving forward (transistioning forward)

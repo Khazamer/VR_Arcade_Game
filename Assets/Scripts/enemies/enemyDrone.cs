@@ -137,6 +137,8 @@ public class enemyDrone : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         //gameObject.GetComponent<Rigidbody>().AddForce(0, -1, 0);
         Destroy(gameObject, 1.5f); // maybe have an explosion but not an issue for now
+
+        globals.numKills ++;
     }
 
     // need to check if moving forward (transistioning forward)

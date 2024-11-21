@@ -4,8 +4,6 @@ using UnityEngine;
 
 public static class globals
 {
-    public static bool thrown = false;
-
-    public static bool collidedWithWall = false;
-    public static UnityEngine.Vector3 normOfCollision;
+    public static int numKills = 0;
+    public static string levelTag = "";
 }
