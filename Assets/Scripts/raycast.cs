@@ -19,7 +19,7 @@ public class raycast : MonoBehaviour
         RaycastHit hit;
 
         bool didHit = Physics.Raycast(
-            transform.position,
+            transform.position + (transform.forward * 0.5f),
             transform.forward,
             out hit,
             Mathf.Infinity);

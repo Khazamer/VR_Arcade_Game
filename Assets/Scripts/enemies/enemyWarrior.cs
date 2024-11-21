@@ -9,6 +9,7 @@ public class enemyWarrior : MonoBehaviour
 {
     [SerializeField] GameObject playerTarget;
     [SerializeField] float speed = 3f;
+    [SerializeField] GameObject playerObject;
     
     private Animator animator;
     private bool movingForward = true;
@@ -23,6 +24,9 @@ public class enemyWarrior : MonoBehaviour
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
+
+        playerObject = FindObjectOfType<XROrigin>().gameObject;
+        playerTarget = FindObjectOfType<Camera>().gameObject;
     }
 
     // Update is called once per frame
@@ -65,7 +69,7 @@ public class enemyWarrior : MonoBehaviour
                 Debug.Log(damageCount);
                 if (damageCount < Mathf.RoundToInt(animator.GetCurrentAnimatorStateInfo(0).normalizedTime)) {
                     //count ++;
-                    playerTarget.GetComponent<playerHealth>().addDamage(1);
+                    playerObject.GetComponent<playerHealth>().addDamage(1);
                     damageCount ++;
                 }
             }
@@ -76,12 +80,12 @@ public class enemyWarrior : MonoBehaviour
         isDead = true;
         animator.SetBool("Dead", isDead);
 
+        globals.numKills ++;
+
         gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         Destroy(gameObject, 0.5f);
-
-        globals.numKills ++;
     }
 
     // need to check if moving forward (transistioning forward)

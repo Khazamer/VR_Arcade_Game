@@ -9,6 +9,7 @@ public class enemyDrone : MonoBehaviour
 {
     [SerializeField] GameObject playerTarget;
     [SerializeField] float speed = 3f;
+    [SerializeField] GameObject playerObject;
     
     private Animator animator;
     private bool movingForward = true;
@@ -32,6 +33,9 @@ public class enemyDrone : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
 
         laserLine = GetComponent<LineRenderer>();
+
+        playerObject = FindObjectOfType<XROrigin>().gameObject;
+        playerTarget = FindObjectOfType<Camera>().gameObject;
     }
 
     // Update is called once per frame
@@ -112,7 +116,7 @@ public class enemyDrone : MonoBehaviour
                 laserLine.endWidth = 0.025f;
                 laserLine.enabled = true;
             }
-            else if (damageTimer == 200) {
+            else if (damageTimer == 200) { //add second raycast for check for damage
                 laserLine.startWidth = 0.1f;
                 laserLine.endWidth = 0.1f;
                 //laserLine.material.color = Color.red;
@@ -131,14 +135,14 @@ public class enemyDrone : MonoBehaviour
         isDead = true;
         animator.SetBool("Dead", isDead);
 
+        globals.numKills ++;
+
         //gameObject.GetComponent<BoxCollider>().enabled = false; //This could work for almost any component
         //gameObject.GetComponent<Rigidbody>().isKinematic = false;
         //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        //gameObject.GetComponent<Rigidbody>().useGravity = true; // falls thru floor
         //gameObject.GetComponent<Rigidbody>().AddForce(0, -1, 0);
         Destroy(gameObject, 1.5f); // maybe have an explosion but not an issue for now
-
-        globals.numKills ++;
     }
 
     // need to check if moving forward (transistioning forward)

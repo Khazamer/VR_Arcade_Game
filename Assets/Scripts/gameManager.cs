@@ -10,16 +10,23 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject levelStorage;
     [SerializeField] GameObject startingPad;
     [SerializeField] GameObject levelSelectors;
+    [SerializeField] GameObject raycast;
     private GameObject currLevel;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void restartLevelSelect() {
         gameObject.transform.position = startingPad.transform.position + new Vector3(0, 1, 0);
 
         wordDisplay.SetText("Point at a cube and press a trigger to select a level");
 
         levelSelectors.SetActive(true);
+
+        raycast.GetComponent<raycast>().enabled = true;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        restartLevelSelect();
 
         foreach(Transform child in levelStorage.transform) {
             child.gameObject.GetComponent<levelManager>().enabled = false;
@@ -33,7 +40,7 @@ public class gameManager : MonoBehaviour
                     currLevel = child.gameObject;
 
                     currLevel.GetComponent<levelManager>().enabled = true;
-                    gameObject.GetComponent<raycast>().enabled = false;
+                    raycast.GetComponent<raycast>().enabled = false;
 
                     wordDisplay.SetText("");
 

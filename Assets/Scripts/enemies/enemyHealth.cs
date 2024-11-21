@@ -15,6 +15,8 @@ public class enemyHealth : MonoBehaviour
             else if (gameObject.GetComponent<enemyDrone>()) {
                 gameObject.GetComponent<enemyDrone>().died();
             }
+
+            gameObject.GetComponent<enemyHealth>().enabled = false;
         }
     }
 }

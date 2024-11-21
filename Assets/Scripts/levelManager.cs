@@ -44,18 +44,27 @@ public class levelManager : MonoBehaviour
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
+        Debug.Log("summon");
+        Debug.Log(levelPart);
         StartCoroutine(spawnEnemies(levelPart));
     }
 
     IEnumerator spawnEnemies(int ind) {
-        yield return new WaitForSeconds(splineAnimation.Duration + preBattleTimePerPart[ind]);
+        //yield return new WaitForSeconds(splineAnimation.Duration + preBattleTimePerPart[ind]);
 
-        for (int i = 0; i < spawnWavesPerPart[i]; i++) {
+        for (int i = 0; i < spawnWavesPerPart[ind]; i++) {
+            Debug.Log("wave");
             //levelObj = levelParts[ind];
             //currObjLoc = levelParts[ind].transform.getChil;
             levelTransform = levelParts[ind].transform;
             foreach (Transform child in levelTransform) {
+                Debug.Log("child");
                 for (int j = 0; j < spawnNumPerWave[ind]; j++) { // may change later to randomize or split num of spawns between the spawners since that is a bit confusing in the system
+                    Debug.Log("spawning");
+                    Debug.Log(levelTransform.transform.position);
+                    Debug.Log(child.transform.position);
+                    Debug.Log(child.transform.localPosition);
+
                     int chance = Random.Range(0, 100);
 
                     if (chance < spawnChancePerPart[ind]) {
@@ -82,8 +91,6 @@ public class levelManager : MonoBehaviour
             }
         }
         else if (levelPart == numParts) {
-            playerOrigin.GetComponent<raycast>().enabled = true;
-
             gameObject.GetComponent<levelManager>().enabled = false;
         }
         else {
@@ -99,8 +106,6 @@ public class levelManager : MonoBehaviour
                 Invoke("togglePreWords", splineAnimation.Duration);
             }
         }
-
-        globals.numKills = 0;
 
         enemiesLeft = enemiesPerPart[levelPart];
     }
@@ -120,16 +125,23 @@ public class levelManager : MonoBehaviour
     void Start() {
         splineAnimation = playerOrigin.GetComponent<SplineAnimate>();
 
+        enemiesLeft = -1;
+        globals.numKills = 0;
+
         Invoke("nextPart", 0.1f); // all scripts are initally disabled for levels and we have a check (should probs do that myself tho)
     }
 
     void Update() {
+        //Debug.Log("in game");
         if (globals.numKills == enemiesLeft) {
             Invoke("nextPart", postBattleTimePerPart[levelPart]);
 
             if (postBattleWordsPerPart[levelPart] != "") {
                 togglePostWords();
             }
+
+            globals.numKills = 0;
+            enemiesLeft = -1;
 
             levelPart ++;
         }
