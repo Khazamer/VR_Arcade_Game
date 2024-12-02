@@ -41,6 +41,8 @@ public class enemyDrone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // fix for spin
+        // rigidbody.angularVelocity = new Vector3(0,0,0);
         //Debug.Log(gameObject.transform.position);
         //Debug.Log(damageCount);
 

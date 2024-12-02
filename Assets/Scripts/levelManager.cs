@@ -82,7 +82,7 @@ public class levelManager : MonoBehaviour
 
     void nextPart() {
         if (levelPart == 0) {
-            playerOrigin.transform.position = levelParts[levelPart].transform.position + new Vector3(0, 1, 0);
+            playerOrigin.transform.position = levelParts[levelPart].transform.position;// + new Vector3(0, 1, 0);
 
             Invoke("summonEnemies", preBattleTimePerPart[0]);
 
@@ -133,6 +133,7 @@ public class levelManager : MonoBehaviour
 
     void Update() {
         //Debug.Log("in game");
+        //Debug.Log(globals.numKills);
         if (globals.numKills == enemiesLeft) {
             Invoke("nextPart", postBattleTimePerPart[levelPart]);
 
