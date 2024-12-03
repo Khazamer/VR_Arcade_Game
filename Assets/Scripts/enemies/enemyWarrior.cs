@@ -46,10 +46,14 @@ public class enemyWarrior : MonoBehaviour
         }
 
         if (movingForward && !isDead) {
+            /*
             Vector3 lookNoY = new Vector3(playerTarget.transform.position[0], 0, playerTarget.transform.position[2]);
             //transform.LookAt(playerTarget.transform.position);
             transform.LookAt(lookNoY);
             transform.position += transform.forward * speed;
+            */
+            transform.LookAt(playerTarget.transform);
+            transform.position += transform.forward * speed; // add something here to move them above the mesh since they seem to fall through very easily
         }
 
         if (!movingForward && !isDead) {

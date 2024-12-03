@@ -50,10 +50,12 @@ public class gameManager : MonoBehaviour
     {
         restartLevelSelect();
 
+        /*
         foreach(Transform child in levelStorage.transform) {
             //child.gameObject.GetComponent<levelManager>().enabled = false;
             child.gameObject.SetActive(false);
         }
+        */
     }
 
 /*
