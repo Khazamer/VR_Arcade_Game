@@ -12,14 +12,14 @@ public class levelManager : MonoBehaviour
     [SerializeField] int numParts = 3;
     [SerializeField] List<int> enemiesPerPart; // total enemies
     [SerializeField] List<int> spawnWavesPerPart; // number of waves
-    [SerializeField] List<int> spawnNumPerWave; // number of enemies per wave (might change into a list of lists down the line)
+    [SerializeField] List<int> spawnNumPerWave; // number of enemies per wave (might change into a list of lists down the line) [THIS IS AT EACH SPAWN POINT NOT TOTAL]
     [SerializeField] List<int> spawnChancePerPart; // chance of spawning a warrior or drone
     [SerializeField] List<int> timeBetweenWavesPerPart; // interval between waves
-    [SerializeField] List<int> preBattleTimePerPart; // time before the fighting starts
-    [SerializeField] List<float> postBattleTimePerPart; // time after the fighting is done before movement
+    [SerializeField] List<int> preBattleTimePerPart = new List<int>{0,0,0}; // time before the fighting starts
+    [SerializeField] List<int> postBattleTimePerPart = new List<int>{0,0,0}; // time after the fighting is done before movement
     //Would have made displays multi worded but double lists were giving me issues
-    [SerializeField] List<string> preBattleWordsPerPart; // words to show before fighting
-    [SerializeField] List<string> postBattleWordsPerPart; // words to show after fighting
+    [SerializeField] List<string> preBattleWordsPerPart = new List<string>{"","",""}; // words to show before fighting
+    [SerializeField] List<string> postBattleWordsPerPart = new List<string>{"","",""}; // words to show after fighting
     [SerializeField] List<GameObject> levelParts; // gameobjects of each part of level containing spawn locations and/or text
     [SerializeField] List<SplineContainer> levelSplines; //splines to move between different parts of each level
 
@@ -44,8 +44,8 @@ public class levelManager : MonoBehaviour
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
-        Debug.Log("summon");
-        Debug.Log(levelPart);
+        //Debug.Log("summon");
+        //Debug.Log(levelPart);
         StartCoroutine(spawnEnemies(levelPart));
     }
 
@@ -96,7 +96,7 @@ public class levelManager : MonoBehaviour
         else {
             currSpline = levelSplines[levelPart - 1];
 
-            splineAnimation.Container = currSpline;
+            splineAnimation.Container = currSpline; //add some sort of indicator
 
             splineAnimation.Restart(true);
 
@@ -134,6 +134,10 @@ public class levelManager : MonoBehaviour
     void Update() {
         //Debug.Log("in game");
         //Debug.Log(globals.numKills);
+        // Show enemies left - NEEDS SOME WORK
+        //int left = enemiesLeft - globals.numKills;
+        //Debug.Log(left);
+
         if (globals.numKills == enemiesLeft) {
             Invoke("nextPart", postBattleTimePerPart[levelPart]);
 

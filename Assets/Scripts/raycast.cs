@@ -26,6 +26,7 @@ public class raycast : MonoBehaviour
 
         if (didHit) {
             globals.levelTag = hit.transform.tag;
+            Debug.Log(hit.transform.tag);
         }
     }
 }
