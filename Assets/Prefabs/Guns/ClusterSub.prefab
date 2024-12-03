@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6583193214334601111}
   - component: {fileID: 7850699816625217849}
   - component: {fileID: 5356911492409730556}
+  - component: {fileID: 1216079288476889454}
   m_Layer: 6
   m_Name: ClusterSub
   m_TagString: SMG
@@ -260,6 +261,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1216079288476889454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116233820753564581}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1171825197456856652
 GameObject:
   m_ObjectHideFlags: 0

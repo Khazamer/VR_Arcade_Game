@@ -29,7 +29,7 @@ public class pistolShoot : MonoBehaviour
                     GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.2f) + (transform.up * 0.07f), transform.rotation);
                     Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
                     newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
-                    Destroy(newBullet, 2);
+                    Destroy(newBullet, 3);
 
                     GameObject newShell = Instantiate(ShellTemplate, transform.position + (transform.forward * -0.02f) + (transform.right * 0.04f) + (transform.up * 0.073f), transform.rotation);
                     newShell.GetComponent<Rigidbody>().AddForce(transform.right * (shootPower / 10f));

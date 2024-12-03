@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 839915259965235839}
   - component: {fileID: 6772731068698062360}
   - component: {fileID: 3512720675675608869}
+  - component: {fileID: 7632910544959065577}
   m_Layer: 6
   m_Name: ClusterShotgun
   m_TagString: Shotgun
@@ -560,6 +561,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7632910544959065577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224249256464634726}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6287488127964258099
 GameObject:
   m_ObjectHideFlags: 0

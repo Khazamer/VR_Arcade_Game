@@ -47,7 +47,7 @@ public class shotgunShoot : MonoBehaviour
                         }
                     }
                     //newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
-                    Destroy(newBullet, 2);
+                    Destroy(newBullet, 3);
 
                     GameObject newShell = Instantiate(ShellTemplate, transform.position + (transform.forward * -0.1f) + (transform.right * 0.04f) + (transform.up * 0.06f), transform.rotation);
                     newShell.transform.localRotation *= Quaternion.Euler(-90, 0, 0);

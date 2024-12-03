@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -40,6 +41,7 @@ public class levelManager : MonoBehaviour
     private bool showWords;
     private float wordTimer;
     private float wordDisplayTime;
+    private GameObject origin;
     //private int temp = globals.numKills; //can set early but wont update
 
     // Enemy Spawning
@@ -90,8 +92,10 @@ public class levelManager : MonoBehaviour
                 togglePreWords();
             }
         }
-        else if (levelPart == numParts) {
-            gameObject.GetComponent<levelManager>().enabled = false;
+        else if (levelPart == numParts) { //need to add some sort of wait for this but otherwise it works
+            //gameObject.GetComponent<levelManager>().enabled = false;
+            origin.GetComponent<gameManager>().restartLevelSelect();
+            gameObject.SetActive(false);
         }
         else {
             currSpline = levelSplines[levelPart - 1];
@@ -124,6 +128,8 @@ public class levelManager : MonoBehaviour
 
     void Start() {
         splineAnimation = playerOrigin.GetComponent<SplineAnimate>();
+
+        origin = FindObjectOfType<XROrigin>().gameObject;
 
         enemiesLeft = -1;
         globals.numKills = 0;

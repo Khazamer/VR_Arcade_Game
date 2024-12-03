@@ -14,8 +14,11 @@ public class gameManager : MonoBehaviour
     private GameObject currLevel;
 
     public void startLevel(RaycastHit hit) {
+        Debug.Log("here");
         foreach(Transform child in levelStorage.transform) {
+            Debug.Log("Searching");
             if(child.CompareTag(hit.transform.tag)) {
+                Debug.Log("found");
                 currLevel = child.gameObject; //all next levels wont have that tag
 
                 //currLevel.GetComponent<levelManager>().enabled = true;
@@ -32,7 +35,7 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    void restartLevelSelect() {
+    public void restartLevelSelect() {
         gameObject.transform.position = startingPad.transform.position;// + new Vector3(0, 1, 0);
 
         wordDisplay.SetText("Click with the right trigger to select a level");
