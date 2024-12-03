@@ -5,5 +5,5 @@ using UnityEngine;
 public static class globals
 {
     public static int numKills = 0;
-    public static string levelTag = "";
+    //public static string levelTag = "";
 }

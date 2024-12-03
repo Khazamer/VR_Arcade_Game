@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - demo_level
   - endless
+  - main_levels
   layers:
   - Default
   - TransparentFX

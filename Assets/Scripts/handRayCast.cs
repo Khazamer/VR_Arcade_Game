@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class raycast : MonoBehaviour
+public class handRayCast : MonoBehaviour
 {
-    [SerializeField] private InputActionReference castingButtonLeft;
-    [SerializeField] private InputActionReference castingButtonRight;
+    [SerializeField] private InputActionReference teleportButtonPress;
+    [SerializeField] private GameObject origin;
 
     // Start is called before the first frame update
     void Start()
     {
-        castingButtonLeft.action.performed += DoRaycast;
-        castingButtonRight.action.performed += DoRaycast;
+        teleportButtonPress.action.performed += DoRaycast;
     }
 
     void DoRaycast(InputAction.CallbackContext __) {
+        Debug.Log("Started");
         RaycastHit hit;
 
         bool didHit = Physics.Raycast(
@@ -25,7 +25,8 @@ public class raycast : MonoBehaviour
             Mathf.Infinity);
 
         if (didHit) {
-            globals.levelTag = hit.transform.tag;
+            //globals.levelTag = hit.transform.tag;
+            origin.GetComponent<gameManager>().startLevel(hit);
             Debug.Log(hit.transform.tag);
         }
     }
