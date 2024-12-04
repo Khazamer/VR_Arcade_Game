@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4035384050311464916}
   - component: {fileID: 4035384050312267766}
   - component: {fileID: 4035384050313233718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_DroneWingRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4035384050311464918}
   - component: {fileID: 4035384050312267768}
   - component: {fileID: 4035384050313233720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_DroneWingLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4035384050311464920}
   - component: {fileID: 4035384050312267770}
   - component: {fileID: 4035384050313233722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_DroneBladeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 4035384050311464922}
   - component: {fileID: 4035384050312267772}
   - component: {fileID: 4035384050313233724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_DroneBladeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 697499727913266497}
   - component: {fileID: 5219372841620036593}
   - component: {fileID: 2132488645645915707}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_Drone_Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.8, y: 0.5, z: 0.85}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8270402995009707423
 MonoBehaviour:
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 4035384050311464926}
   - component: {fileID: 4035384050312267774}
   - component: {fileID: 4035384050313233726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PA_Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

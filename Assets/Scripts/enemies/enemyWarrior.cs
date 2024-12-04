@@ -35,6 +35,8 @@ public class enemyWarrior : MonoBehaviour
         //Debug.Log(gameObject.transform.position);
         //Debug.Log(damageCount);
 
+        Debug.Log(gameObject.transform.rotation.eulerAngles);
+
         if (Vector3.Distance(gameObject.transform.position, playerTarget.transform.position) < attackDistance) {
             movingForward = false;
             animator.SetBool("Moving Forward", movingForward);
@@ -46,14 +48,21 @@ public class enemyWarrior : MonoBehaviour
         }
 
         if (movingForward && !isDead) {
-            /*
-            Vector3 lookNoY = new Vector3(playerTarget.transform.position[0], 0, playerTarget.transform.position[2]);
+            Vector3 lookSmallY = new Vector3(playerTarget.transform.position[0], transform.position[1] + 0.5f, playerTarget.transform.position[2]);
             //transform.LookAt(playerTarget.transform.position);
-            transform.LookAt(lookNoY);
-            transform.position += transform.forward * speed;
+            /*
+            if (transform.rotation.eulerAngles[0] > 20) {
+                transform.rotation *= Quaternion.Euler(-1 * (transform.rotation.eulerAngles[0] - 20), 0, 0);
+            }
+            else if (transform.rotation.eulerAngles[0] < 0) {
+                transform.rotation *= Quaternion.Euler(-1 * transform.rotation.eulerAngles[0], 0, 0);
+            }
             */
-            transform.LookAt(playerTarget.transform);
-            transform.position += transform.forward * speed; // add something here to move them above the mesh since they seem to fall through very easily
+            transform.LookAt(lookSmallY);
+            transform.position += transform.forward * speed;
+
+            //transform.LookAt(playerTarget.transform);
+            //transform.position += transform.forward * speed; // add something here to move them above the mesh since they seem to fall through very easily
         }
 
         if (!movingForward && !isDead) {
@@ -79,6 +88,13 @@ public class enemyWarrior : MonoBehaviour
             }
         }
     }
+
+    // Correct for falling through floor
+    /*
+    void OnTriggerEnter() {
+        transform.position += transform.up * 0.25f;
+    }
+    */
 
     public void died() {
         isDead = true;

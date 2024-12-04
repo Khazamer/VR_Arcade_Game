@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEditor;
 
 public class levelManager : MonoBehaviour
 {
@@ -22,7 +24,8 @@ public class levelManager : MonoBehaviour
     [SerializeField] List<string> preBattleWordsPerPart = new List<string>{"","",""}; // words to show before fighting
     [SerializeField] List<string> postBattleWordsPerPart = new List<string>{"","",""}; // words to show after fighting
     [SerializeField] List<GameObject> levelParts; // gameobjects of each part of level containing spawn locations and/or text
-    [SerializeField] List<SplineContainer> levelSplines; //splines to move between different parts of each level
+    [SerializeField] List<SplineContainer> levelSplines; // splines to move between different parts of each level
+    [SerializeField] GameObject itemContainer; // object holding all items
 
     [Header("Spawning")]
     [SerializeField] GameObject warriorTemplate;
@@ -42,7 +45,9 @@ public class levelManager : MonoBehaviour
     private float wordTimer;
     private float wordDisplayTime;
     private GameObject origin;
-    //private int temp = globals.numKills; //can set early but wont update
+    // tracking of weapons and locations so they can be put back where they should be
+    private List<int> weaponIDS;
+    private List<Vector3> weaponLocations;
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
@@ -95,6 +100,16 @@ public class levelManager : MonoBehaviour
         else if (levelPart == numParts) { //need to add some sort of wait for this but otherwise it works
             //gameObject.GetComponent<levelManager>().enabled = false;
             origin.GetComponent<gameManager>().restartLevelSelect();
+
+            // remove weapons and put them back
+            for (int i = 0; i < weaponIDS.Count(); i++) {
+                Object obj = EditorUtility.InstanceIDToObject(weaponIDS[i]);
+                GameObject temp = obj.GameObject();
+                temp.transform.position = weaponLocations[i];
+                temp.transform.rotation = Quaternion.Euler(0, 0, 0);
+                temp.transform.parent = itemContainer.transform;
+            }
+
             gameObject.SetActive(false);
         }
         else {
@@ -133,6 +148,12 @@ public class levelManager : MonoBehaviour
 
         enemiesLeft = -1;
         globals.numKills = 0;
+
+        // get weapon locations and names
+        foreach(Transform child in itemContainer.transform) {
+            weaponIDS.Add(child.GetInstanceID());
+            weaponLocations.Add(child.transform.position);
+        }
 
         Invoke("nextPart", 0.1f); // all scripts are initally disabled for levels and we have a check (should probs do that myself tho)
     }
