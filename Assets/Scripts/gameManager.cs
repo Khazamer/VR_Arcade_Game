@@ -11,8 +11,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject startingPad;
     [SerializeField] GameObject levelSelectors;
     [SerializeField] GameObject selectHand;
-    [SerializeField] GameObject leftHand;
-    [SerializeField] GameObject rightHand;
     private GameObject currLevel;
 
     public void startLevel(RaycastHit hit) {
@@ -27,12 +25,15 @@ public class gameManager : MonoBehaviour
                 // Enable or disable whole object instead
                 currLevel.SetActive(true);
 
-                //raycast.GetComponent<raycast>().enabled = false;
-                selectHand.GetComponent<handRayCast>().enabled = false;
+                //selectHand.GetComponent<handRayCast>().enabled = false;
 
                 wordDisplay.SetText("");
 
                 levelSelectors.SetActive(false);
+
+                currLevel.GetComponent<levelManager>().levelStart();
+
+                Debug.Log("Starting level");
             }
         }
     }
@@ -41,6 +42,8 @@ public class gameManager : MonoBehaviour
         gameObject.transform.position = startingPad.transform.position;// + new Vector3(0, 1, 0);
 
         wordDisplay.SetText("Click with the right trigger to select a level");
+
+        //selectHand.GetComponent<handRayCast>().enabled = true;
 
         levelSelectors.SetActive(true);
 

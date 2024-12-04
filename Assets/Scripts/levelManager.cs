@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEditor;
 
 public class levelManager : MonoBehaviour
 {
@@ -46,8 +45,8 @@ public class levelManager : MonoBehaviour
     private float wordDisplayTime;
     private GameObject origin;
     // tracking of weapons and locations so they can be put back where they should be
-    private List<int> weaponIDS;
-    private List<Vector3> weaponLocations;
+    List<GameObject> weaponObjects = new List<GameObject>();
+    List<Vector3> weaponLocations = new List<Vector3>();
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
@@ -99,16 +98,15 @@ public class levelManager : MonoBehaviour
         }
         else if (levelPart == numParts) { //need to add some sort of wait for this but otherwise it works
             //gameObject.GetComponent<levelManager>().enabled = false;
-            origin.GetComponent<gameManager>().restartLevelSelect();
 
             // remove weapons and put them back
-            for (int i = 0; i < weaponIDS.Count(); i++) {
-                Object obj = EditorUtility.InstanceIDToObject(weaponIDS[i]);
-                GameObject temp = obj.GameObject();
-                temp.transform.position = weaponLocations[i];
-                temp.transform.rotation = Quaternion.Euler(0, 0, 0);
-                temp.transform.parent = itemContainer.transform;
-            }
+            for (int i = 0; i < weaponObjects.Count(); i++) {
+                weaponObjects[i].transform.position = weaponLocations[i];
+                weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+                weaponObjects[i].transform.parent = itemContainer.transform;
+            }           
+
+            origin.GetComponent<gameManager>().restartLevelSelect(); 
 
             gameObject.SetActive(false);
         }
@@ -141,19 +139,32 @@ public class levelManager : MonoBehaviour
         showWords = true;
     }
 
-    void Start() {
+    public void levelStart() {
+        levelPart = 0;
+
+        Debug.Log("Started");
         splineAnimation = playerOrigin.GetComponent<SplineAnimate>();
 
+        Debug.Log("0");
         origin = FindObjectOfType<XROrigin>().gameObject;
+
+        Debug.Log("1");
 
         enemiesLeft = -1;
         globals.numKills = 0;
 
+        Debug.Log("2");
+
         // get weapon locations and names
-        foreach(Transform child in itemContainer.transform) {
-            weaponIDS.Add(child.GetInstanceID());
+        foreach(Transform child in itemContainer.transform) { // may move to its own start loop since we only need it once but idk if it resets random variables
+            Debug.Log("3");
+            weaponObjects.Add(child.gameObject);
+            Debug.Log("4");
             weaponLocations.Add(child.transform.position);
+            Debug.Log("5");
         }
+
+        Debug.Log("6");
 
         Invoke("nextPart", 0.1f); // all scripts are initally disabled for levels and we have a check (should probs do that myself tho)
     }

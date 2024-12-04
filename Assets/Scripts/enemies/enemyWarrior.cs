@@ -35,7 +35,8 @@ public class enemyWarrior : MonoBehaviour
         //Debug.Log(gameObject.transform.position);
         //Debug.Log(damageCount);
 
-        Debug.Log(gameObject.transform.rotation.eulerAngles);
+        // For floor debugging
+        //Debug.Log(gameObject.transform.rotation.eulerAngles);
 
         if (Vector3.Distance(gameObject.transform.position, playerTarget.transform.position) < attackDistance) {
             movingForward = false;
