@@ -26,6 +26,7 @@ public class levelManager : MonoBehaviour
     [SerializeField] List<SplineContainer> levelSplines; // splines to move between different parts of each level
     [SerializeField] GameObject itemContainer; // object holding all items
     [SerializeField] GameObject moveCube; // cube indicating movement
+    [SerializeField] ParticleSystem moveEffect;
 
     [Header("Spawning")]
     [SerializeField] GameObject warriorTemplate;
@@ -118,12 +119,12 @@ public class levelManager : MonoBehaviour
 
             splineAnimation.Restart(true);
 
-            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart] + 2f);
+            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart]);
             
             //moveCube.GetComponent<doTween>().moveCube();
 
             if (preBattleWordsPerPart[levelPart] != "") {
-                Invoke("togglePreWords", splineAnimation.Duration + 2f);
+                Invoke("togglePreWords", splineAnimation.Duration);
             }
         }
 
@@ -131,7 +132,8 @@ public class levelManager : MonoBehaviour
     }
 
     void movementCube() {
-        moveCube.GetComponent<doTween>().moveCube();
+        moveCube.GetComponent<doTween>().moveCube(); //not consistent for some reason
+        //moveEffect.Play();
     }
 
     void togglePreWords() {
@@ -184,9 +186,9 @@ public class levelManager : MonoBehaviour
         //Debug.Log(left);
 
         if (globals.numKills == enemiesLeft) {
-            Invoke("nextPart", postBattleTimePerPart[levelPart]);
+            Invoke("nextPart", Mathf.Max(postBattleTimePerPart[levelPart], 2f));
 
-            Invoke("movementCube", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0f));
+            Invoke("movementCube", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0.01f)); //some issue with invoking?
 
             if (postBattleWordsPerPart[levelPart] != "") {
                 togglePostWords();

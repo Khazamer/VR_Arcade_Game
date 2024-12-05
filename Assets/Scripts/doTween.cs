@@ -13,13 +13,15 @@ public class doTween : MonoBehaviour
     public void moveCube() {
         cube.GetComponent<MeshRenderer>().enabled = true;
 
-        transform.DOLocalMoveY(1f, 2f);
+        transform.DOLocalMoveY(0.2f, 2f);
 
         cube.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.FastBeyond360)
             //.SetLoops(1, LoopType.Restart)
             .SetEase(Ease.InElastic);
 
         particles.Play();
+
+        Invoke("hideCube", 2f);
     }
 
     void hideCube() {
