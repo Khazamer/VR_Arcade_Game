@@ -25,6 +25,7 @@ public class levelManager : MonoBehaviour
     [SerializeField] List<GameObject> levelParts; // gameobjects of each part of level containing spawn locations and/or text
     [SerializeField] List<SplineContainer> levelSplines; // splines to move between different parts of each level
     [SerializeField] GameObject itemContainer; // object holding all items
+    [SerializeField] GameObject moveCube; // cube indicating movement
 
     [Header("Spawning")]
     [SerializeField] GameObject warriorTemplate;
@@ -90,7 +91,7 @@ public class levelManager : MonoBehaviour
         if (levelPart == 0) {
             playerOrigin.transform.position = levelParts[levelPart].transform.position;// + new Vector3(0, 1, 0);
 
-            Invoke("summonEnemies", Mathf.Max(preBattleTimePerPart[0], 1f)); //need to change to animation time
+            Invoke("summonEnemies", preBattleTimePerPart[0]);
 
             if (preBattleWordsPerPart[0] != "") { // may change down the line if I only use words at the beginning of the level
                 togglePreWords();
@@ -117,14 +118,20 @@ public class levelManager : MonoBehaviour
 
             splineAnimation.Restart(true);
 
-            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart]);
+            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart] + 2f);
+            
+            //moveCube.GetComponent<doTween>().moveCube();
 
             if (preBattleWordsPerPart[levelPart] != "") {
-                Invoke("togglePreWords", splineAnimation.Duration);
+                Invoke("togglePreWords", splineAnimation.Duration + 2f);
             }
         }
 
         enemiesLeft = enemiesPerPart[levelPart];
+    }
+
+    void movementCube() {
+        moveCube.GetComponent<doTween>().moveCube();
     }
 
     void togglePreWords() {
@@ -178,6 +185,8 @@ public class levelManager : MonoBehaviour
 
         if (globals.numKills == enemiesLeft) {
             Invoke("nextPart", postBattleTimePerPart[levelPart]);
+
+            Invoke("movementCube", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0f));
 
             if (postBattleWordsPerPart[levelPart] != "") {
                 togglePostWords();

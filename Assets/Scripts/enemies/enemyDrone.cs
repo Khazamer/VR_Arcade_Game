@@ -10,6 +10,7 @@ public class enemyDrone : MonoBehaviour
     [SerializeField] GameObject playerTarget;
     [SerializeField] float speed = 3f;
     [SerializeField] GameObject playerObject;
+    [SerializeField] LayerMask player;
     
     private Animator animator;
     private bool movingForward = true;
@@ -48,7 +49,8 @@ public class enemyDrone : MonoBehaviour
 
         // make it not shoot in your eyes
         target = playerTarget.transform.position;
-        target[1] = Math.Max(target[1] - 0.5f, 0.2f);
+        //target[1] = Math.Max(target[1] - 0.5f, 0.2f);
+        target[1] -= 0.5f;
 
         if (Vector3.Distance(gameObject.transform.position, target) < attackDistance) {
             movingForward = false;
@@ -97,12 +99,16 @@ public class enemyDrone : MonoBehaviour
         if (!movingForward && !isDead) {
             damageTimer ++;
 
+            if (damageTimer % 10 == 0) {
+                transform.LookAt(target);
+            }
+
             if(damageTimer == 100) {
                 transform.LookAt(target);
                 laserLine.SetPosition(0, gameObject.transform.position + (gameObject.transform.forward * 0.5f));
                 Vector3 rayOrigin = gameObject.transform.position;
                 RaycastHit hit;
-                if(Physics.Raycast(rayOrigin, gameObject.transform.forward, out hit, gunRange))
+                if(Physics.Raycast(rayOrigin, gameObject.transform.forward, out hit, gunRange, player))
                 {
                     laserLine.SetPosition(1, hit.point);
                 }
