@@ -17,9 +17,12 @@ public class pistolShoot : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public AudioClip gunShot;
     private bool alreadyPushed = false;
+    private int ammo = 15;
 
     void Update() {
         currTimer += Time.deltaTime;
+
+        // add in check for upgrades later
 
         if (gameObject.transform.parent != null) {
             if (!alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() > 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() > 0.5))) {
