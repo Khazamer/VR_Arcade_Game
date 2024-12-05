@@ -90,7 +90,7 @@ public class levelManager : MonoBehaviour
         if (levelPart == 0) {
             playerOrigin.transform.position = levelParts[levelPart].transform.position;// + new Vector3(0, 1, 0);
 
-            Invoke("summonEnemies", preBattleTimePerPart[0]);
+            Invoke("summonEnemies", Mathf.Max(preBattleTimePerPart[0], 1f)); //need to change to animation time
 
             if (preBattleWordsPerPart[0] != "") { // may change down the line if I only use words at the beginning of the level
                 togglePreWords();

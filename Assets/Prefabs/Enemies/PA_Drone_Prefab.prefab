@@ -428,6 +428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  skin: {fileID: 0}
+  main: {fileID: 2100000, guid: 9468cfbf407387c4d8fef60308588e42, type: 2}
+  damaged: {fileID: 2100000, guid: 0bdcf0b999bde7a4fb4eecefc566cf8a, type: 2}
 --- !u!114 &4747389703271336255
 MonoBehaviour:
   m_ObjectHideFlags: 0
