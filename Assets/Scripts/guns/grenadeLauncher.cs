@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class grenadeLauncher : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class grenadeLauncher : MonoBehaviour
                     muzzleFlash.Play();
 
                     GetComponent<AudioSource>().PlayOneShot(gunShot);
+
+                    gameObject.transform.parent.parent.GetComponent<XRBaseController>().SendHapticImpulse(0.3f, 0.1f);
 
                     currTimer = 0f;
                 }

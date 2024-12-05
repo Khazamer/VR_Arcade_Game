@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class smgShoot : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class smgShoot : MonoBehaviour
 
                     GetComponent<AudioSource>().PlayOneShot(gunShot);
                     //GetComponent<AudioSource>().Play(0);
+
+                    gameObject.transform.parent.parent.GetComponent<XRBaseController>().SendHapticImpulse(0.1f, 0.1f);
 
                     currTimer = 0f;
                 }

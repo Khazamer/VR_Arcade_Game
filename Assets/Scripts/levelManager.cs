@@ -59,14 +59,14 @@ public class levelManager : MonoBehaviour
         //yield return new WaitForSeconds(splineAnimation.Duration + preBattleTimePerPart[ind]);
 
         for (int i = 0; i < spawnWavesPerPart[ind]; i++) {
-            Debug.Log("wave");
+            //Debug.Log("wave");
             //levelObj = levelParts[ind];
             //currObjLoc = levelParts[ind].transform.getChil;
             levelTransform = levelParts[ind].transform;
             foreach (Transform child in levelTransform) {
-                Debug.Log("child");
+                //Debug.Log("child");
                 for (int j = 0; j < spawnNumPerWave[ind]; j++) { // may change later to randomize or split num of spawns between the spawners since that is a bit confusing in the system
-                    Debug.Log("spawning");
+                    //Debug.Log("spawning");
                     Debug.Log(levelTransform.transform.position);
                     Debug.Log(child.transform.position);
                     Debug.Log(child.transform.localPosition);
