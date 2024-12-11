@@ -106,15 +106,15 @@ public class enemyDrone : MonoBehaviour
             if(damageTimer == 100) {
                 transform.LookAt(target);
                 laserLine.SetPosition(0, gameObject.transform.position + (gameObject.transform.forward * 0.5f));
-                Vector3 rayOrigin = gameObject.transform.position;
+                //Vector3 rayOrigin = gameObject.transform.position;
                 RaycastHit hit;
-                if(Physics.Raycast(rayOrigin, gameObject.transform.forward, out hit, gunRange, player))
+                if(Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, gunRange, player))
                 {
                     laserLine.SetPosition(1, hit.point);
                 }
                 else
                 {
-                    laserLine.SetPosition(1, rayOrigin + (gameObject.transform.forward * gunRange));
+                    laserLine.SetPosition(1, gameObject.transform.position + (gameObject.transform.forward * gunRange));
                 }
 
                 //laserLine.material.color = Color.blue;
@@ -130,6 +130,16 @@ public class enemyDrone : MonoBehaviour
                 //laserLine.material.color = Color.red;
                 laserLine.startColor = Color.red;
                 laserLine.endColor = Color.red;
+
+                /*
+                //check if hitting player for damage - JUST ADD DAMAGE FOR NOW
+                RaycastHit hit;
+                if(Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, gunRange, player)) {
+                    
+                }
+                */
+
+                playerObject.GetComponent<playerHealth>().addDamage(1);
             }
             else if (damageTimer == 250) {
                 damageTimer = 0;

@@ -27,6 +27,8 @@ public class enemyWarrior : MonoBehaviour
 
         playerObject = FindObjectOfType<XROrigin>().gameObject;
         playerTarget = FindObjectOfType<Camera>().gameObject;
+
+        //Debug.Log(playerObject.tag);
     }
 
     // Update is called once per frame

@@ -47,18 +47,21 @@ public class levelManager : MonoBehaviour
     private float wordDisplayTime;
     private GameObject origin;
     // tracking of weapons and locations so they can be put back where they should be
-    List<GameObject> weaponObjects = new List<GameObject>();
-    List<Vector3> weaponLocations = new List<Vector3>();
+    private List<GameObject> weaponObjects = new List<GameObject>();
+    private List<Vector3> weaponLocations = new List<Vector3>();
+    private List<GameObject> enemies = new List<GameObject>();
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
         //Debug.Log("summon");
         //Debug.Log(levelPart);
-        StartCoroutine(spawnEnemies(levelPart));
+        StartCoroutine(spawnEnemies());
     }
 
-    IEnumerator spawnEnemies(int ind) {
+    IEnumerator spawnEnemies() {
         //yield return new WaitForSeconds(splineAnimation.Duration + preBattleTimePerPart[ind]);
+
+        int ind = levelPart;
 
         for (int i = 0; i < spawnWavesPerPart[ind]; i++) {
             //Debug.Log("wave");
@@ -77,9 +80,11 @@ public class levelManager : MonoBehaviour
 
                     if (chance < spawnChancePerPart[ind]) {
                         GameObject newWarrior = Instantiate(warriorTemplate, child);
+                        enemies.Append(newWarrior);
                     }
                     else {
                         GameObject newDrone = Instantiate(droneTemplate, child.position + (child.up * 3), child.rotation);
+                        enemies.Append(newDrone);
                     }
                 }
             }
@@ -129,6 +134,31 @@ public class levelManager : MonoBehaviour
         }
 
         enemiesLeft = enemiesPerPart[levelPart];
+    }
+
+    public void playerDied() {
+         // remove weapons and put them back
+        for (int i = 0; i < weaponObjects.Count(); i++) {
+            weaponObjects[i].transform.position = weaponLocations[i];
+            weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+            weaponObjects[i].transform.parent = itemContainer.transform;
+        }       
+
+        StopCoroutine(spawnEnemies());
+
+        for (int j = 0; j < enemies.Count(); j ++) {
+            //Destroy(enemies[j]);
+            try {
+                Destroy(enemies[j]);
+            }
+            catch {
+                //nothing here cuz no need
+            }
+        }    
+
+        origin.GetComponent<gameManager>().restartLevelSelect(); 
+
+        gameObject.SetActive(false);
     }
 
     void movementCube() {
