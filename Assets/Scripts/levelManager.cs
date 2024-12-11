@@ -49,7 +49,7 @@ public class levelManager : MonoBehaviour
     // tracking of weapons and locations so they can be put back where they should be
     private List<GameObject> weaponObjects = new List<GameObject>();
     private List<Vector3> weaponLocations = new List<Vector3>();
-    private List<GameObject> enemies = new List<GameObject>();
+    //private List<GameObject> enemies = new List<GameObject>();
 
     // Enemy Spawning
     void summonEnemies() { //remove summon script
@@ -80,12 +80,14 @@ public class levelManager : MonoBehaviour
 
                     if (chance < spawnChancePerPart[ind]) {
                         GameObject newWarrior = Instantiate(warriorTemplate, child);
-                        enemies.Append(newWarrior);
+                        //enemies.Append(newWarrior);
                     }
                     else {
                         GameObject newDrone = Instantiate(droneTemplate, child.position + (child.up * 3), child.rotation);
-                        enemies.Append(newDrone);
+                        //enemies.Append(newDrone);
                     }
+
+                    //wordDisplay.SetText(enemies.Count().ToString());
                 }
             }
 
@@ -106,16 +108,19 @@ public class levelManager : MonoBehaviour
         else if (levelPart == numParts) { //need to add some sort of wait for this but otherwise it works
             //gameObject.GetComponent<levelManager>().enabled = false;
 
+            /*
             // remove weapons and put them back
             for (int i = 0; i < weaponObjects.Count(); i++) {
                 weaponObjects[i].transform.position = weaponLocations[i];
                 weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
                 weaponObjects[i].transform.parent = itemContainer.transform;
-            }           
+            }  
+            */         
 
             origin.GetComponent<gameManager>().restartLevelSelect(); 
 
-            gameObject.SetActive(false);
+            //Invoke("disableObject", 3f);
+            disableObject();
         }
         else {
             currSpline = levelSplines[levelPart - 1];
@@ -137,15 +142,23 @@ public class levelManager : MonoBehaviour
     }
 
     public void playerDied() {
-         // remove weapons and put them back
+        /*
+        // remove weapons and put them back
         for (int i = 0; i < weaponObjects.Count(); i++) {
             weaponObjects[i].transform.position = weaponLocations[i];
             weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
             weaponObjects[i].transform.parent = itemContainer.transform;
-        }       
+        }      
+        */ 
 
         StopCoroutine(spawnEnemies());
 
+        enemiesLeft = -1;
+        globals.numKills = 0;
+
+        globals.gameOver = true;
+
+        /*
         for (int j = 0; j < enemies.Count(); j ++) {
             //Destroy(enemies[j]);
             try {
@@ -153,10 +166,21 @@ public class levelManager : MonoBehaviour
             }
             catch {
                 //nothing here cuz no need
+                wordDisplay.SetText(enemies[j].name);
             }
         }    
+        */
 
-        origin.GetComponent<gameManager>().restartLevelSelect(); 
+        Invoke("disableObject", 3f);
+    }
+
+    void disableObject() {
+        // remove weapons and put them back
+        for (int i = 0; i < weaponObjects.Count(); i++) {
+            weaponObjects[i].transform.position = weaponLocations[i];
+            weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+            weaponObjects[i].transform.parent = itemContainer.transform;
+        }   
 
         gameObject.SetActive(false);
     }

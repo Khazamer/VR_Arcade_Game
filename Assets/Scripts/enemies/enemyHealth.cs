@@ -38,7 +38,7 @@ public class enemyHealth : MonoBehaviour
 
                 gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = damaged;
 
-                Invoke("resetSkinMat", 0.05f);
+                Invoke("resetSkinMat", 0.1f);
             }
             else if (gameObject.GetComponent<enemyDrone>()) {
                 health -= damage;

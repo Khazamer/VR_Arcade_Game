@@ -26,6 +26,7 @@ public class enemyDrone : MonoBehaviour
     public float gunRange = 50f;
     public float laserDuration = 0.05f;
     private Vector3 target;
+    private bool imDead = false;
  
     LineRenderer laserLine;
     // Start is called before the first frame update
@@ -145,6 +146,14 @@ public class enemyDrone : MonoBehaviour
                 damageTimer = 0;
 
                 laserLine.enabled = false;
+            }
+        }
+
+        //check if game over / player died
+        if (globals.gameOver) {
+            if (!imDead) {
+                transform.GetComponent<enemyHealth>().addDamage(1000);
+                imDead = true;
             }
         }
     }

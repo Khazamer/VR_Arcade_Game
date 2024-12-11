@@ -39,6 +39,8 @@ public class gameManager : MonoBehaviour
     }
 
     public void restartLevelSelect() {
+        globals.gameOver = false;
+
         gameObject.transform.position = startingPad.transform.position + new Vector3(0, 1, 0);
 
         wordDisplay.SetText("Click with the a button to select a level");

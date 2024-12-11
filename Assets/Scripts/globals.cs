@@ -5,6 +5,7 @@ using UnityEngine;
 public static class globals
 {
     public static int numKills = 0;
+    public static bool gameOver = false;
     
     // Weapon Values for Upgrades
     public static int pistolShootSpeed;

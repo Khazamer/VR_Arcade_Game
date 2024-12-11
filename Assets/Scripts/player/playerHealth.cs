@@ -8,23 +8,26 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class playerHealth : MonoBehaviour
 {
-    [SerializeField] int health = 100;
+    [SerializeField] int startHealth = 100;
     [SerializeField] TMP_Text wordDisplay;
     [SerializeField] GameObject levels;
     private bool isDead = false;
-    [SerializeField] float intensity = 0.5f;
-    [SerializeField] PostProcessVolume volume;
-    Vignette _vignette;
-    private float tempIntensity;
-    private ParticleSystem damageParticles;
+    //[SerializeField] float intensity = 0.5f;
+    //[SerializeField] PostProcessVolume volume;
+    [SerializeField] ParticleSystem damageParticles;
+    //Vignette _vignette;
+    //private float tempIntensity;
+    private int health;
 
     void Start() {
         //vingnette = volume.gameObject.GetComponent<Vignette>();
-        volume.profile.TryGetSettings<Vignette>(out _vignette);
+        //volume.profile.TryGetSettings<Vignette>(out _vignette);
 
-        _vignette.enabled.Override(false);
+        //_vignette.enabled.Override(false);
 
-        damageParticles = transform.GetComponentInChildren<ParticleSystem>();
+        //damageParticles = transform.GetComponentInChildren<ParticleSystem>();
+
+        health = startHealth;
     }
 
     public void addDamage(int damage) {
@@ -43,11 +46,20 @@ public class playerHealth : MonoBehaviour
                 //Debug.Log("Game Over");
                 wordDisplay.SetText("You died. Game over");
 
+                //globals.gameOver = true;
+
+                foreach(Transform child in levels.transform) {
+                    if (child.gameObject.activeSelf == true) {
+                        child.GetComponent<levelManager>().playerDied();
+                    }
+                }
+
                 Invoke("gameOver", 5f);
             }
         }
     }
 
+    /*
     IEnumerator takeDamageEffect() {
         _vignette.enabled.Override(true);
         _vignette.intensity.Override(intensity);
@@ -69,12 +81,12 @@ public class playerHealth : MonoBehaviour
         _vignette.enabled.Override(false);
         yield break;
     }
+    */
 
     void gameOver() {
-        foreach(Transform child in levels.transform) {
-            if (child.gameObject.activeSelf == true) {
-                child.GetComponent<levelManager>().playerDied();
-            }
-        }
+        transform.GetComponent<gameManager>().restartLevelSelect();
+
+        health = startHealth;
+        isDead = false;
     }
 }

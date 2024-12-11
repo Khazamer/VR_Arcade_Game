@@ -14,6 +14,7 @@ public class enemyWarrior : MonoBehaviour
     private Animator animator;
     private bool movingForward = true;
     private bool isDead = false;
+    private bool imDead = false;
 
     //private bool framePassed = false;
     //private int count = 0;
@@ -88,6 +89,14 @@ public class enemyWarrior : MonoBehaviour
                     playerObject.GetComponent<playerHealth>().addDamage(1);
                     damageCount ++;
                 }
+            }
+        }
+
+        //check if game over / player died
+        if (globals.gameOver) {
+            if (!imDead) {
+                transform.GetComponent<enemyHealth>().addDamage(1000);
+                imDead = true;
             }
         }
     }
