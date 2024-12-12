@@ -428,7 +428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  skin: {fileID: 0}
   main: {fileID: 2100000, guid: 9468cfbf407387c4d8fef60308588e42, type: 2}
   damaged: {fileID: 2100000, guid: 0bdcf0b999bde7a4fb4eecefc566cf8a, type: 2}
 --- !u!114 &4747389703271336255
@@ -446,6 +445,9 @@ MonoBehaviour:
   playerTarget: {fileID: 0}
   speed: 0.02
   playerObject: {fileID: 0}
+  player:
+    serializedVersion: 2
+    m_Bits: 0
   gunRange: 50
   laserDuration: 0.05
 --- !u!120 &697499727913266497
@@ -561,7 +563,7 @@ Rigidbody:
   m_GameObject: {fileID: 4035384050310978556}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
