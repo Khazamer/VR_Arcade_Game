@@ -92,4 +92,9 @@ public class playerHealth : MonoBehaviour
         health = startHealth;
         isDead = false;
     }
+
+    public void resetHealth() {
+        health = startHealth;
+        healthDisplay.SetText("");
+    }
 }

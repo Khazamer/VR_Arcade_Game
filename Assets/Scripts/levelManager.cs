@@ -18,15 +18,15 @@ public class levelManager : MonoBehaviour
     [SerializeField] List<int> spawnNumPerWaveAtEachPoint; // number of enemies per wave (might change into a list of lists down the line) [THIS IS AT EACH SPAWN POINT NOT TOTAL]
     [SerializeField] List<int> spawnChancePerPart; // chance of spawning a warrior or drone
     [SerializeField] List<int> timeBetweenWavesPerPart; // interval between waves
-    [SerializeField] List<int> preBattleTimePerPart = new List<int>{0,0,0}; // time before the fighting starts
-    [SerializeField] List<int> postBattleTimePerPart = new List<int>{0,0,0}; // time after the fighting is done before movement
+    [SerializeField] List<float> preBattleTimePerPart = new List<float>{0.1f,0.1f,0.1f}; // time before the fighting starts
+    [SerializeField] List<float> postBattleTimePerPart = new List<float>{0.1f,0.1f,0.1f}; // time after the fighting is done before movement
     //Would have made displays multi worded but double lists were giving me issues
     [SerializeField] List<string> preBattleWordsPerPart = new List<string>{"","",""}; // words to show before fighting
     [SerializeField] List<string> postBattleWordsPerPart = new List<string>{"","",""}; // words to show after fighting
     [SerializeField] List<GameObject> levelParts; // gameobjects of each part of level containing spawn locations and/or text
     [SerializeField] List<SplineContainer> levelSplines; // splines to move between different parts of each level
     [SerializeField] List<GameObject> weapons; // list of weapons to spawn in
-    [SerializeField] GameObject itemContainer; // object holding all items
+    //[SerializeField] GameObject itemContainer; // object holding all items
     [SerializeField] GameObject moveCube; // cube indicating movement
     [SerializeField] ParticleSystem moveEffect;
     [SerializeField] GameObject itemStorage; // weapons that were added in are stored here as children to be removed
@@ -51,8 +51,8 @@ public class levelManager : MonoBehaviour
     private GameObject origin;
     private GameObject mainCamera;
     // tracking of weapons and locations so they can be put back where they should be
-    private List<GameObject> weaponObjects = new List<GameObject>();
-    private List<Vector3> weaponLocations = new List<Vector3>();
+    //private List<GameObject> weaponObjects = new List<GameObject>();
+    //private List<Vector3> weaponLocations = new List<Vector3>();
     //private List<GameObject> enemies = new List<GameObject>();
 
     // Enemy Spawning
@@ -101,9 +101,9 @@ public class levelManager : MonoBehaviour
 
     void nextPart() {
         if (levelPart == 0) {
-            playerOrigin.transform.position = levelParts[levelPart].transform.position;// + new Vector3(0, 1, 0);
+            playerOrigin.transform.position = levelParts[levelPart].transform.position + new Vector3(0, 0.5f, 0);
 
-            Invoke("summonEnemies", preBattleTimePerPart[0]);
+            Invoke("summonEnemies", preBattleTimePerPart[0] + 1f);
 
             Invoke("spawnWeapon", 1f);
 
@@ -131,9 +131,14 @@ public class levelManager : MonoBehaviour
                 disableObject();
             }
             else {
-                disableObject();
-                
+                //disableObject();
+
+                nextLevelPart.SetActive(true);
                 nextLevelPart.GetComponent<levelManager>().levelStart();
+
+                origin.GetComponent<playerHealth>().resetHealth();
+
+                gameObject.SetActive(false);
             }
         }
         else {
@@ -143,7 +148,7 @@ public class levelManager : MonoBehaviour
 
             splineAnimation.Restart(true);
 
-            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart]);
+            Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart] + 1f);
 
             Invoke("spawnWeapon", 1f);
             
@@ -210,6 +215,7 @@ public class levelManager : MonoBehaviour
         */
         
         // See if I should remove weapons
+        /*
         if (nextLevelPart == null) {
             // Delete them entirely
             foreach(Transform child in itemStorage.transform) {
@@ -217,11 +223,26 @@ public class levelManager : MonoBehaviour
             }
 
             // Gets rid of guns in hands
-            foreach (GameObject hand in GameObject.FindGameObjectsWithTag("hand")) {
+            foreach (GameObject hand in GameObject.FindGameObjectsWithTag("Hand")) {
                 if (hand.transform.childCount > 0) {
-                    Destroy(hand.transform.GetChild(0));
+                    Destroy(hand.transform.GetChild(0).gameObject);
                 }
             }
+        }
+        */
+        
+        // New system
+        foreach (GameObject pistol in GameObject.FindGameObjectsWithTag("Pistol")) {
+            Destroy(pistol);
+        }
+        foreach (GameObject SMG in GameObject.FindGameObjectsWithTag("SMG")) {
+            Destroy(SMG);
+        }
+        foreach (GameObject shotgun in GameObject.FindGameObjectsWithTag("Shotgun")) {
+            Destroy(shotgun);
+        }
+        foreach (GameObject grenadeLauncher in GameObject.FindGameObjectsWithTag("GrenadeLauncher")) {
+            Destroy(grenadeLauncher);
         }
 
         gameObject.SetActive(false);
@@ -230,6 +251,10 @@ public class levelManager : MonoBehaviour
     void movementCube() {
         moveCube.GetComponent<doTween>().moveCube(); //not consistent for some reason
         //moveEffect.Play();
+    }
+
+    void movementParticles() {
+        moveEffect.Play();
     }
 
     void togglePreWords() {
@@ -287,7 +312,8 @@ public class levelManager : MonoBehaviour
         if (globals.numKills == enemiesLeft) {
             Invoke("nextPart", Mathf.Max(postBattleTimePerPart[levelPart], 2f));
 
-            Invoke("movementCube", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0.01f)); //some issue with invoking?
+            //Invoke("movementCube", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0.01f)); //some issue with invoking?
+            Invoke("movementParticles", Mathf.Max(postBattleTimePerPart[levelPart] - 2f, 0.01f));
 
             if (postBattleWordsPerPart[levelPart] != "") {
                 togglePostWords();
@@ -320,6 +346,7 @@ public class levelManager : MonoBehaviour
 
         if (showWords) {
             wordTimer += Time.deltaTime;
+            //wordDisplay.SetText(wordTimer.ToString());
             if (wordTimer > wordDisplayTime) {
                 wordDisplay.SetText("");
                 wordTimer = 0;

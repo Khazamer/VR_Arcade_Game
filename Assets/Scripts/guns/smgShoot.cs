@@ -22,9 +22,6 @@ public class smgShoot : MonoBehaviour
     //reload check
     [SerializeField] int ammo = 30;
     [SerializeField] TMP_Text ammo_display;
-    private bool upDone = false;
-    private bool downDone = false;
-    private Vector3 prevRot;
     private int currAmmo;
 
     void Start() {
@@ -42,7 +39,6 @@ public class smgShoot : MonoBehaviour
                     if (Timer - currTimer <= 0) {
                         currAmmo -= 1;
                         updateAmmoCount();
-                        prevRot = transform.rotation.eulerAngles;
 
                         //Debug.Log("SMG shot");
                         GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.2f) + (transform.up * 0.1f), transform.rotation);
@@ -66,25 +62,9 @@ public class smgShoot : MonoBehaviour
                     }
                 }
             }
-            else {
-                if (upDone && downDone) {
+            if (transform.forward[1] > 0.9f) {
                     currAmmo = ammo;
-
                     updateAmmoCount();
-
-                    upDone = false;
-                    downDone = false;
-                }
-                else {
-                    //if (gameObject.transform.position[1] - prevPos[1] > 0.01f) {
-                    if (prevRot.x - gameObject.transform.rotation.eulerAngles.x > 5) {
-                        upDone = true;
-                    }
-                    //else if (prevPos[1] - gameObject.transform.position[1] > 0.01f) {
-                    else if (gameObject.transform.rotation.eulerAngles.x - prevRot.x > 5) {
-                        downDone = true;
-                    }
-                }
             }
         }
     }

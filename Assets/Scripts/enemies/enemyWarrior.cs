@@ -20,7 +20,7 @@ public class enemyWarrior : MonoBehaviour
     //private int count = 0;
     private int damageCount = 0;
     private int damageTimer = 0;
-    private float attackDistance = 3f;
+    private float attackDistance = 2.5f;
     // Start is called before the first frame update
     void Start()
     {

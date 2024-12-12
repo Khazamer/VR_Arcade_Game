@@ -23,9 +23,6 @@ public class pistolShoot : MonoBehaviour
     //reload check
     [SerializeField] int ammo = 15;
     [SerializeField] TMP_Text ammo_display;
-    private bool upDone = false;
-    private bool downDone = false;
-    private Vector3 prevRot;
     private int currAmmo;
 
     void Start() {
@@ -44,6 +41,8 @@ public class pistolShoot : MonoBehaviour
                 if (!alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() > 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() > 0.5))) {
                     if (Timer - currTimer <= 0) {
                         alreadyPushed = true;
+                        currAmmo -= 1;
+                        updateAmmoCount();
 
                         GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.2f) + (transform.up * 0.07f), transform.rotation);
                         Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
@@ -68,25 +67,9 @@ public class pistolShoot : MonoBehaviour
                     alreadyPushed = false;
                 }
             }
-            else {
-                if (upDone && downDone) {
+            if (transform.forward[1] > 0.9f) {
                     currAmmo = ammo;
-
                     updateAmmoCount();
-
-                    upDone = false;
-                    downDone = false;
-                }
-                else {
-                    //if (gameObject.transform.position[1] - prevPos[1] > 0.01f) {
-                    if (prevRot.x - gameObject.transform.rotation.eulerAngles.x > 5) {
-                        upDone = true;
-                    }
-                    //else if (prevPos[1] - gameObject.transform.position[1] > 0.01f) {
-                    else if (gameObject.transform.rotation.eulerAngles.x - prevRot.x > 5) {
-                        downDone = true;
-                    }
-                }
             }
         }
     }

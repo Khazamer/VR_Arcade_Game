@@ -43,7 +43,7 @@ public class gameManager : MonoBehaviour
 
         gameObject.transform.position = startingPad.transform.position + new Vector3(0, 1, 0);
 
-        wordDisplay.SetText("Click with the a button to select a level");
+        wordDisplay.SetText("Click with the a button to select a level. Basics: Pick up weapons with the inner trigger, shoot with the front trigger, and reload by flicking the weapons up to the sky. Enemies can spawn anywhere around you so make sure to turn around!");
 
         //selectHand.GetComponent<handRayCast>().enabled = true;
 
