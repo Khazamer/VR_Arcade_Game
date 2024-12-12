@@ -12,13 +12,18 @@ public class pistolShoot : MonoBehaviour
     [SerializeField] GameObject ShellTemplate;
     [SerializeField] float shootPower = 100f;
     [SerializeField] float Timer = 0.2f;
+    [SerializeField] int ammo = 15;
     private float currTimer = 0f;
     public InputActionReference rightTrigger;
     public InputActionReference leftTrigger;
     public ParticleSystem muzzleFlash;
     public AudioClip gunShot;
     private bool alreadyPushed = false;
-    private int ammo = 15;
+    private int currAmmo;
+
+    void Start() {
+        currAmmo = ammo;
+    }
 
     void Update() {
         currTimer += Time.deltaTime;

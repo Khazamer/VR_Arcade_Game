@@ -12,6 +12,7 @@ public class levelManager : MonoBehaviour
     [Header("Level Specific")]
     [SerializeField] string levelName;
     [SerializeField] int numParts = 3;
+    [SerializeField] GameObject nextLevelPart;
     [SerializeField] List<int> enemiesPerPart; // total enemies
     [SerializeField] List<int> spawnWavesPerPart; // number of waves
     [SerializeField] List<int> spawnNumPerWave; // number of enemies per wave (might change into a list of lists down the line) [THIS IS AT EACH SPAWN POINT NOT TOTAL]
@@ -106,21 +107,29 @@ public class levelManager : MonoBehaviour
             }
         }
         else if (levelPart == numParts) { //need to add some sort of wait for this but otherwise it works
-            //gameObject.GetComponent<levelManager>().enabled = false;
+            // if there is only 1 part to the level
+            if (nextLevelPart == null) {
+                //gameObject.GetComponent<levelManager>().enabled = false;
 
-            /*
-            // remove weapons and put them back
-            for (int i = 0; i < weaponObjects.Count(); i++) {
-                weaponObjects[i].transform.position = weaponLocations[i];
-                weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
-                weaponObjects[i].transform.parent = itemContainer.transform;
-            }  
-            */         
+                /*
+                // remove weapons and put them back
+                for (int i = 0; i < weaponObjects.Count(); i++) {
+                    weaponObjects[i].transform.position = weaponLocations[i];
+                    weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+                    weaponObjects[i].transform.parent = itemContainer.transform;
+                }  
+                */         
 
-            origin.GetComponent<gameManager>().restartLevelSelect(); 
+                origin.GetComponent<gameManager>().restartLevelSelect(); 
 
-            //Invoke("disableObject", 3f);
-            disableObject();
+                //Invoke("disableObject", 3f);
+                disableObject();
+            }
+            else {
+                disableObject();
+                
+                nextLevelPart.GetComponent<levelManager>().levelStart();
+            }
         }
         else {
             currSpline = levelSplines[levelPart - 1];
