@@ -10,6 +10,7 @@ public class playerHealth : MonoBehaviour
 {
     [SerializeField] int startHealth = 100;
     [SerializeField] TMP_Text wordDisplay;
+    [SerializeField] TMP_Text healthDisplay;
     [SerializeField] GameObject levels;
     private bool isDead = false;
     //[SerializeField] float intensity = 0.5f;
@@ -38,7 +39,7 @@ public class playerHealth : MonoBehaviour
 
             damageParticles.Play();
 
-            wordDisplay.SetText(health.ToString());
+            healthDisplay.SetText("Health left: " + health.ToString());
 
             if (health <= 0) {
                 isDead = true;
@@ -85,6 +86,8 @@ public class playerHealth : MonoBehaviour
 
     void gameOver() {
         transform.GetComponent<gameManager>().restartLevelSelect();
+
+        healthDisplay.SetText("");
 
         health = startHealth;
         isDead = false;
