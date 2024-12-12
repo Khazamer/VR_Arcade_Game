@@ -53,6 +53,8 @@ public class enemyDrone : MonoBehaviour
         //target[1] = Math.Max(target[1] - 0.5f, 0.2f);
         target[1] -= 0.5f;
 
+        transform.LookAt(target);
+
         if (Vector3.Distance(gameObject.transform.position, target) < attackDistance) {
             movingForward = false;
             animator.SetBool("Moving Forward", movingForward);
@@ -63,7 +65,6 @@ public class enemyDrone : MonoBehaviour
         }
 
         if (movingForward && !isDead) {
-            transform.LookAt(target);
             transform.position += transform.forward * speed; 
         }
 
@@ -100,12 +101,8 @@ public class enemyDrone : MonoBehaviour
         if (!movingForward && !isDead) {
             damageTimer ++;
 
-            if (damageTimer % 10 == 0) {
-                transform.LookAt(target);
-            }
-
             if(damageTimer == 100) {
-                transform.LookAt(target);
+                //transform.LookAt(target);
                 laserLine.SetPosition(0, gameObject.transform.position + (gameObject.transform.forward * 0.5f));
                 //Vector3 rayOrigin = gameObject.transform.position;
                 RaycastHit hit;

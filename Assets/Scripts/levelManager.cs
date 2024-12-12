@@ -101,7 +101,7 @@ public class levelManager : MonoBehaviour
 
     void nextPart() {
         if (levelPart == 0) {
-            playerOrigin.transform.position = levelParts[levelPart].transform.position + new Vector3(0, 0.5f, 0);
+            playerOrigin.transform.position = levelParts[levelPart].transform.position;// + new Vector3(0, 0.5f, 0);
 
             Invoke("summonEnemies", preBattleTimePerPart[0] + 1f);
 
