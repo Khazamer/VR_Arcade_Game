@@ -99,6 +99,12 @@ public class enemyWarrior : MonoBehaviour
                 imDead = true;
             }
         }
+
+        //incase floor problems
+        if (!isDead && transform.position[1] < -10) {
+            isDead = true;
+            died();
+        }
     }
 
     // Correct for falling through floor
