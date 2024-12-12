@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,6 +18,7 @@ public class pickupScript : MonoBehaviour
 
     //Input detection
     [SerializeField] private InputActionReference trigger;
+    [SerializeField] GameObject itemStorage; // stores the weapons when not being held for deletion
 
     private bool alreadyDone = false;
 
@@ -78,7 +80,7 @@ public class pickupScript : MonoBehaviour
         heldObjRB.drag = 1;
         heldObjRB.constraints = RigidbodyConstraints.None;
 
-        heldObjRB.transform.parent = null;
+        heldObjRB.transform.parent = itemStorage.transform;
         heldObj = null;
     }
 }

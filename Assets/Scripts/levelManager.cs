@@ -25,9 +25,11 @@ public class levelManager : MonoBehaviour
     [SerializeField] List<string> postBattleWordsPerPart = new List<string>{"","",""}; // words to show after fighting
     [SerializeField] List<GameObject> levelParts; // gameobjects of each part of level containing spawn locations and/or text
     [SerializeField] List<SplineContainer> levelSplines; // splines to move between different parts of each level
+    [SerializeField] List<GameObject> weapons; // list of weapons to spawn in
     [SerializeField] GameObject itemContainer; // object holding all items
     [SerializeField] GameObject moveCube; // cube indicating movement
     [SerializeField] ParticleSystem moveEffect;
+    [SerializeField] GameObject itemStorage; // weapons that were added in are stored here as children to be removed
 
     [Header("Spawning")]
     [SerializeField] GameObject warriorTemplate;
@@ -47,6 +49,7 @@ public class levelManager : MonoBehaviour
     private float wordTimer;
     private float wordDisplayTime;
     private GameObject origin;
+    private GameObject mainCamera;
     // tracking of weapons and locations so they can be put back where they should be
     private List<GameObject> weaponObjects = new List<GameObject>();
     private List<Vector3> weaponLocations = new List<Vector3>();
@@ -102,6 +105,8 @@ public class levelManager : MonoBehaviour
 
             Invoke("summonEnemies", preBattleTimePerPart[0]);
 
+            Invoke("spawnWeapon", 1f);
+
             if (preBattleWordsPerPart[0] != "") { // may change down the line if I only use words at the beginning of the level
                 togglePreWords();
             }
@@ -139,6 +144,8 @@ public class levelManager : MonoBehaviour
             splineAnimation.Restart(true);
 
             Invoke("summonEnemies", splineAnimation.Duration + preBattleTimePerPart[levelPart]);
+
+            Invoke("spawnWeapon", 1f);
             
             //moveCube.GetComponent<doTween>().moveCube();
 
@@ -183,13 +190,39 @@ public class levelManager : MonoBehaviour
         Invoke("disableObject", 3f);
     }
 
+    void spawnWeapon() {
+        if (weapons[levelPart] != null) {
+            GameObject weapon = Instantiate(weapons[levelPart], levelParts[levelPart].transform.position + new Vector3 (0,2,0), mainCamera.transform.rotation);
+            weapon.transform.position += weapon.transform.forward * 1f;
+
+            weapon.transform.parent = itemStorage.transform;
+        }
+    }
+
     void disableObject() {
+        /*
         // remove weapons and put them back
         for (int i = 0; i < weaponObjects.Count(); i++) {
             weaponObjects[i].transform.position = weaponLocations[i];
             weaponObjects[i].transform.rotation = Quaternion.Euler(0, 0, 0);
             weaponObjects[i].transform.parent = itemContainer.transform;
         }   
+        */
+        
+        // See if I should remove weapons
+        if (nextLevelPart == null) {
+            // Delete them entirely
+            foreach(Transform child in itemStorage.transform) {
+                Destroy(child.gameObject);
+            }
+
+            // Gets rid of guns in hands
+            foreach (GameObject hand in GameObject.FindGameObjectsWithTag("hand")) {
+                if (hand.transform.childCount > 0) {
+                    Destroy(hand.transform.GetChild(0));
+                }
+            }
+        }
 
         gameObject.SetActive(false);
     }
@@ -214,20 +247,22 @@ public class levelManager : MonoBehaviour
     public void levelStart() {
         levelPart = 0;
 
-        Debug.Log("Started");
+        //Debug.Log("Started");
         splineAnimation = playerOrigin.GetComponent<SplineAnimate>();
 
-        Debug.Log("0");
+        //Debug.Log("0");
         origin = FindObjectOfType<XROrigin>().gameObject;
+        mainCamera = FindObjectOfType<Camera>().gameObject;
 
-        Debug.Log("1");
+        //Debug.Log("1");
 
         enemiesLeft = -1;
         globals.numKills = 0;
 
-        Debug.Log("2");
+        //Debug.Log("2");
 
-        // get weapon locations and names
+        // get weapon locations and names - no need since gonna instantiate the weapons anyways
+        /*
         foreach(Transform child in itemContainer.transform) { // may move to its own start loop since we only need it once but idk if it resets random variables
             Debug.Log("3");
             weaponObjects.Add(child.gameObject);
@@ -235,8 +270,9 @@ public class levelManager : MonoBehaviour
             weaponLocations.Add(child.transform.position);
             Debug.Log("5");
         }
+        */
 
-        Debug.Log("6");
+        //Debug.Log("6");
 
         Invoke("nextPart", 0.1f); // all scripts are initally disabled for levels and we have a check (should probs do that myself tho)
     }

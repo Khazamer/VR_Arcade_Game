@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;
 
 public class grenadeLauncher : MonoBehaviour
 {
@@ -18,40 +19,82 @@ public class grenadeLauncher : MonoBehaviour
     public AudioClip gunShot;
     private bool alreadyPushed = false;
 
+    //reload check
+    [SerializeField] int ammo = 6;
+    [SerializeField] TMP_Text ammo_display;
+    private bool upDone = false;
+    private bool downDone = false;
+    private Vector3 prevRot;
+    private int currAmmo;
+
+    void Start() {
+        currAmmo = ammo;
+
+        updateAmmoCount();
+    }
+
     void Update() {
         currTimer += Time.deltaTime;
 
         if (gameObject.transform.parent != null && gameObject.transform.parent.tag == "Hand") {
-            if (!alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() > 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() > 0.5))) {
-                if (Timer - currTimer <= 0) {
-                    alreadyPushed = true;
+            if (currAmmo > 0) {
+                if (!alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() > 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() > 0.5))) {
+                    if (Timer - currTimer <= 0) {
+                        alreadyPushed = true;
 
-                    GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.5f) + (transform.up * 0.03f), transform.rotation);
-                    newBullet.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
-                    Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
-                    newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
-                    //Destroy(newBullet, 2);
+                        GameObject newBullet = Instantiate(BulletTemplate, transform.position + (transform.forward * 0.5f) + (transform.up * 0.03f), transform.rotation);
+                        newBullet.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
+                        Physics.IgnoreCollision(newBullet.GetComponent<Collider>(), GetComponent<Collider>());
+                        newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * shootPower);
+                        //Destroy(newBullet, 2);
 
-                    /*
-                    GameObject newShell = Instantiate(ShellTemplate, transform.position + (transform.forward * -0.1f) + (transform.right * 0.04f) + (transform.up * 0.06f), transform.rotation);
-                    newShell.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
-                    newShell.GetComponent<Rigidbody>().AddForce(transform.right * (shootPower / 10f));
-                    newShell.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1 * (shootPower / 10f), 0));
-                    Destroy(newShell, 1);
-                    */
+                        /*
+                        GameObject newShell = Instantiate(ShellTemplate, transform.position + (transform.forward * -0.1f) + (transform.right * 0.04f) + (transform.up * 0.06f), transform.rotation);
+                        newShell.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
+                        newShell.GetComponent<Rigidbody>().AddForce(transform.right * (shootPower / 10f));
+                        newShell.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1 * (shootPower / 10f), 0));
+                        Destroy(newShell, 1);
+                        */
 
-                    muzzleFlash.Play();
+                        muzzleFlash.Play();
 
-                    GetComponent<AudioSource>().PlayOneShot(gunShot);
+                        GetComponent<AudioSource>().PlayOneShot(gunShot);
 
-                    gameObject.transform.parent.parent.GetComponent<XRBaseController>().SendHapticImpulse(0.3f, 0.1f);
+                        gameObject.transform.parent.parent.GetComponent<XRBaseController>().SendHapticImpulse(0.3f, 0.1f);
 
-                    currTimer = 0f;
+                        currTimer = 0f;
+                    }
+                }
+                else if (alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() < 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() < 0.5))) {
+                    alreadyPushed = false;
                 }
             }
-            else if (alreadyPushed && ((gameObject.transform.parent.name == "Right hand" && rightTrigger.action.ReadValue<float>() < 0.5) || (gameObject.transform.parent.name == "Left hand" && leftTrigger.action.ReadValue<float>() < 0.5))) {
-                alreadyPushed = false;
+            else {
+                if (upDone && downDone) {
+                    currAmmo = ammo;
+
+                    updateAmmoCount();
+
+                    upDone = false;
+                    downDone = false;
+                }
+                else {
+                    //if (gameObject.transform.position[1] - prevPos[1] > 0.01f) {
+                    if (prevRot.x - gameObject.transform.rotation.eulerAngles.x > 5) {
+                        upDone = true;
+                    }
+                    //else if (prevPos[1] - gameObject.transform.position[1] > 0.01f) {
+                    else if (gameObject.transform.rotation.eulerAngles.x - prevRot.x > 5) {
+                        downDone = true;
+                    }
+                }
             }
         }
+    }
+
+    void updateAmmoCount() {
+        ammo_display.SetText(currAmmo.ToString());
+
+        ammo_display.color = new Color(((float)ammo - (float)currAmmo)/(float)ammo, (float)currAmmo/(float)ammo, 0);
     }
 }

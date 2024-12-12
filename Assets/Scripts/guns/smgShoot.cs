@@ -13,19 +13,19 @@ public class smgShoot : MonoBehaviour
     [SerializeField] GameObject ShellTemplate;
     [SerializeField] float shootPower = 100f;
     [SerializeField] float Timer = 0.05f;
-    [SerializeField] int ammo = 30;
     private float currTimer = 0f;
     public InputActionReference rightTrigger;
     public InputActionReference leftTrigger;
     public ParticleSystem muzzleFlash;
     public AudioClip gunShot;
-    private int currAmmo;
 
     //reload check
+    [SerializeField] int ammo = 30;
     [SerializeField] TMP_Text ammo_display;
     private bool upDone = false;
     private bool downDone = false;
     private Vector3 prevRot;
+    private int currAmmo;
 
     void Start() {
         currAmmo = ammo;
