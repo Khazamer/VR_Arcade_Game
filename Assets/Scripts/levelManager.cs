@@ -15,7 +15,7 @@ public class levelManager : MonoBehaviour
     [SerializeField] GameObject nextLevelPart;
     [SerializeField] List<int> enemiesPerPart; // total enemies
     [SerializeField] List<int> spawnWavesPerPart; // number of waves
-    [SerializeField] List<int> spawnNumPerWave; // number of enemies per wave (might change into a list of lists down the line) [THIS IS AT EACH SPAWN POINT NOT TOTAL]
+    [SerializeField] List<int> spawnNumPerWaveAtEachPoint; // number of enemies per wave (might change into a list of lists down the line) [THIS IS AT EACH SPAWN POINT NOT TOTAL]
     [SerializeField] List<int> spawnChancePerPart; // chance of spawning a warrior or drone
     [SerializeField] List<int> timeBetweenWavesPerPart; // interval between waves
     [SerializeField] List<int> preBattleTimePerPart = new List<int>{0,0,0}; // time before the fighting starts
@@ -74,7 +74,7 @@ public class levelManager : MonoBehaviour
             levelTransform = levelParts[ind].transform;
             foreach (Transform child in levelTransform) {
                 //Debug.Log("child");
-                for (int j = 0; j < spawnNumPerWave[ind]; j++) { // may change later to randomize or split num of spawns between the spawners since that is a bit confusing in the system
+                for (int j = 0; j < spawnNumPerWaveAtEachPoint[ind]; j++) { // may change later to randomize or split num of spawns between the spawners since that is a bit confusing in the system
                     //Debug.Log("spawning");
                     Debug.Log(levelTransform.transform.position);
                     Debug.Log(child.transform.position);
