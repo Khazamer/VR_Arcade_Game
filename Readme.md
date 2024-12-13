@@ -34,7 +34,7 @@ Pistol/smg shot: https://pixabay.com/sound-effects/submachine-gun-79846/
 Shotgun shot: https://pixabay.com/users/dennish18-26151496/
 Grenade launch sound: https://www.myinstants.com/en/instant/tf2-grenade-launcher-shoot-29197/#google_vignette
 Grenade explosion sound: https://www.myinstants.com/en/instant/tf2-explosion-47256/
-^ may change later tbh
+Background noise: https://pixabay.com/sound-effects/drone-dark-and-moody-atmospheric-background-236509/
 
 Particles:
 Unity particle pack: https://assetstore.unity.com/packages/vfx/particles/particle-pack-127325
