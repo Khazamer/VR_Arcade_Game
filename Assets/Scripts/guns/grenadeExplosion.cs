@@ -5,9 +5,9 @@ using UnityEngine;
 public class grenadeExplosion : MonoBehaviour
 {
     [SerializeField] LayerMask layers;
-    [SerializeField] float radius = 5.0f;
-    [SerializeField] float power = 10f;
-    [SerializeField] int damage = 4;
+    float radius = 4.0f;
+    float power = 10f;
+    int damage = 4;
     public ParticleSystem explosion;
     public AudioClip exploded;
     void OnCollisionEnter() {
