@@ -87,7 +87,7 @@ public class levelManager : MonoBehaviour
                         //enemies.Append(newWarrior);
                     }
                     else {
-                        GameObject newDrone = Instantiate(droneTemplate, child.position + (child.up * 3), child.rotation);
+                        GameObject newDrone = Instantiate(droneTemplate, child.position + (child.up * 4), child.rotation);
                         //enemies.Append(newDrone);
                     }
 
