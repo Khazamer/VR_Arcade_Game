@@ -6,8 +6,8 @@ public class grenadeExplosion : MonoBehaviour
 {
     [SerializeField] LayerMask layers;
     float radius = 4.0f;
-    float power = 10f;
-    int damage = 4;
+    float power = 100f;
+    int damage = 3;
     public ParticleSystem explosion;
     public AudioClip exploded;
     void OnCollisionEnter() {
