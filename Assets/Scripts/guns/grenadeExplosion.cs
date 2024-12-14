@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class grenadeExplosion : MonoBehaviour
 {
     [SerializeField] LayerMask layers;
-    float radius = 4.0f;
-    float power = 100f;
-    int damage = 3;
+    [SerializeField] float radius = 3.0f;
+    [SerializeField] float power = 100f;
+    [SerializeField] int damage = 3;
     public ParticleSystem explosion;
     public AudioClip exploded;
+    [SerializeField] ParticleSystem trail;
     void OnCollisionEnter() {
         //Debug.Log("Kaboom");
+
+        // for rockets
+        if (trail != null) {
+            trail.Stop();
+        }
 
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
