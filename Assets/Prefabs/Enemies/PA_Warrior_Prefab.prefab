@@ -916,7 +916,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.1
   m_Height: 1
@@ -935,7 +935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  skin: {fileID: 8271616698046506990}
   main: {fileID: 2100000, guid: f2735dc09a5b53641ba65ba813b6f488, type: 2}
   damaged: {fileID: 2100000, guid: 0bdcf0b999bde7a4fb4eecefc566cf8a, type: 2}
 --- !u!114 &2540396385528838656

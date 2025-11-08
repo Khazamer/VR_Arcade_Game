@@ -153,9 +153,10 @@ MonoBehaviour:
     m_Bits: 4294967295
   radius: 3
   power: 1000
-  damage: 4
+  damage: 3
   explosion: {fileID: 5734850817609718394}
   exploded: {fileID: 8300000, guid: 480983d5dd8f05449945987ead76fee0, type: 3}
+  trail: {fileID: 0}
 --- !u!82 &-5337694750154869029
 AudioSource:
   m_ObjectHideFlags: 0
