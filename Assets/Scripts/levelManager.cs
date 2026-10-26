@@ -244,6 +244,12 @@ public class levelManager : MonoBehaviour
         foreach (GameObject grenadeLauncher in GameObject.FindGameObjectsWithTag("GrenadeLauncher")) {
             Destroy(grenadeLauncher);
         }
+        foreach (GameObject pumpShotty in GameObject.FindGameObjectsWithTag("Pump")) {
+            Destroy(pumpShotty);
+        }
+        foreach (GameObject rocketLauncher in GameObject.FindGameObjectsWithTag("RocketLauncher")) {
+            Destroy(rocketLauncher);
+        }
 
         gameObject.SetActive(false);
     }

@@ -353,6 +353,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_TagString
+      value: RocketLauncher
+      objectReference: {fileID: 0}
     - target: {fileID: -277543946278996766, guid: ec8b8a442393f69458568c90b3736042, type: 3}
       propertyPath: m_Layer
       value: 6

@@ -419,6 +419,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f8d7f4f03bd7b434b8f47b4d829deb7d, type: 3}
+      propertyPath: m_TagString
+      value: Pump
+      objectReference: {fileID: 0}
     - target: {fileID: 821948482349091222, guid: f8d7f4f03bd7b434b8f47b4d829deb7d, type: 3}
       propertyPath: m_Layer
       value: 6
