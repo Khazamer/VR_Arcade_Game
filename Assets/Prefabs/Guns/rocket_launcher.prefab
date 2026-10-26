@@ -297,6 +297,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6819304537156522933, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ec8b8a442393f69458568c90b3736042, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -337,9 +341,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1074157699146651434, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: ec8b8a442393f69458568c90b3736042, type: 3}
       propertyPath: m_Name
       value: rocket_launcher
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -277543946278996766, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -277543946278996766, guid: ec8b8a442393f69458568c90b3736042, type: 3}
       propertyPath: m_IsActive
@@ -357,6 +373,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 44bbc8d1860f00f489666fc58e87696b, type: 2}
+    - target: {fileID: 7586055287445417022, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027124049610543990, guid: ec8b8a442393f69458568c90b3736042, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -624,6 +648,14 @@ PrefabInstance:
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_Name
       value: Rocket Launcher Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_LocalScale.x
