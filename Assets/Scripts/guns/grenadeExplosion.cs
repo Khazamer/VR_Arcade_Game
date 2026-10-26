@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 using UnityEngine;
 
 public class grenadeExplosion : MonoBehaviour
