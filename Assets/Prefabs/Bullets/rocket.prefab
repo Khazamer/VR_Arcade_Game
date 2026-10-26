@@ -162,8 +162,8 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 4294967295
-  radius: 1.5
-  power: 100
+  radius: 3
+  power: 300
   damage: 5
   explosion: {fileID: 7085253719547143406}
   exploded: {fileID: 8300000, guid: 480983d5dd8f05449945987ead76fee0, type: 3}
